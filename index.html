@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Justin Kang</title>
+<meta name="description" content="Chemical Engineering Honours student at Monash University.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf8;
+    --text: #1c1c1c;
+    --muted: #666;
+    --line: #e4e4e0;
+    --accent: #0f6e5c;
+    --accent-soft: #e3f1ed;
+    --card: #ffffff;
+    --danger: #b3261e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121413;
+      --text: #ececec;
+      --muted: #9a9a9a;
+      --line: #2a2d2c;
+      --accent: #4fc3a1;
+      --accent-soft: #1d332d;
+      --card: #1a1d1c;
+      --danger: #f2827a;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 64px 20px 80px; }
+  .wrap.has-bar { padding-bottom: 160px; }
+  header { margin-bottom: 40px; }
+  h1 { font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+  .tagline { font-size: 1.1rem; color: var(--muted); margin-top: 6px; }
+  .links { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .links a {
+    color: var(--accent); text-decoration: none; font-weight: 500;
+    border: 1px solid var(--line); padding: 6px 14px; border-radius: 999px;
+    font-size: 0.92rem;
+  }
+  .links a:hover { border-color: var(--accent); }
+  section { margin-top: 44px; }
+  h2 {
+    font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--accent); font-weight: 600; margin-bottom: 18px;
+  }
+  .hint { color: var(--muted); font-size: 0.92rem; margin-top: 28px; }
+  .prose, .summary { white-space: pre-line; }
+  .item {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 18px 20px; margin-bottom: 14px;
+  }
+  .item.clickable:hover { border-color: var(--accent); }
+  .item-head {
+    all: unset; display: block; width: 100%; cursor: pointer;
+  }
+  .item-head:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 4px; }
+  .item-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; }
+  .item h3 { font-size: 1.02rem; font-weight: 600; }
+  .when { color: var(--muted); font-size: 0.9rem; }
+  .org { color: var(--muted); font-size: 0.95rem; }
+  .summary { margin-top: 8px; font-size: 0.96rem; }
+  .more { display: inline-block; margin-top: 10px; color: var(--accent); font-size: 0.9rem; font-weight: 500; }
+  .detail {
+    display: none; margin-top: 16px; padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .item.open .detail { display: block; }
+  .detail-part + .detail-part { margin-top: 16px; }
+  .detail h4 {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted); font-weight: 600; margin-bottom: 6px;
+  }
+  .detail .prose { font-size: 0.96rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    background: var(--accent-soft); color: var(--accent);
+    padding: 3px 10px; border-radius: 999px; font-size: 0.85rem; font-weight: 500;
+  }
+  footer { margin-top: 64px; color: var(--muted); font-size: 0.85rem; }
+
+  /* Edit mode */
+  .editable {
+    outline: 1px dashed var(--line); border-radius: 4px;
+    padding: 2px 6px; margin: 2px -6px; min-height: 1.5em; min-width: 4em;
+  }
+  .editable:hover { outline-color: var(--muted); }
+  .editable:focus { outline: 2px solid var(--accent); }
+  .editable:empty::before { content: attr(data-placeholder); color: var(--muted); font-weight: 400; }
+  .inputs { display: grid; gap: 10px; margin-top: 20px; }
+  .inp { display: grid; gap: 4px; font-size: 0.85rem; color: var(--muted); }
+  .inp input {
+    font: inherit; font-size: 0.95rem; color: var(--text); background: var(--card);
+    border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; width: 100%;
+  }
+  .inp input:focus { outline: 2px solid var(--accent); border-color: transparent; }
+  button { font: inherit; cursor: pointer; }
+  .add {
+    width: 100%; padding: 12px; border: 1px dashed var(--line); border-radius: 10px;
+    background: none; color: var(--accent); font-weight: 500;
+  }
+  .add:hover { border-color: var(--accent); }
+  .del {
+    margin-top: 14px; background: none; border: none; color: var(--danger);
+    font-size: 0.85rem; padding: 0;
+  }
+  .bar {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    background: var(--card); border-top: 1px solid var(--line);
+    padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 10px;
+    align-items: center; justify-content: space-between;
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.06);
+  }
+  .bar span { font-size: 0.88rem; color: var(--muted); }
+  .bar-btns { display: flex; gap: 8px; }
+  .bar button {
+    border: none; background: var(--accent); color: #fff;
+    padding: 9px 16px; border-radius: 8px; font-weight: 600; font-size: 0.9rem;
+  }
+  .bar button.ghost { background: none; color: var(--accent); border: 1px solid var(--line); }
+  @media (max-width: 520px) {
+    h1 { font-size: 2rem; }
+    .wrap { padding-top: 40px; }
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<noscript><p style="padding:20px">Please turn on JavaScript to view this site.</p></noscript>
+
+<script id="site-data" type="application/json">
+{
+  "name": "Justin Kang",
+  "tagline": "Chemical Engineering (Honours) student at Monash University, graduating 2027",
+  "email": "",
+  "linkedin": "",
+  "resume": "",
+  "about": "I'm a fourth-year chemical engineering student in Melbourne. My work so far spans process economics, corrosion and materials, and growing microalgae for carbon capture.\n\nI like projects where lab work and real industry problems meet, and I'm looking for opportunities in process and materials engineering.",
+  "sections": [
+    {
+      "title": "Experience",
+      "items": [
+        {
+          "title": "Vacation Student",
+          "org": "CSIRO Mineral Resources",
+          "when": "Nov 2026 – Feb 2027",
+          "summary": "Techno-economic evaluation of pyrometallurgical routes for processing antimony, a critical mineral. Supervised by Dr. Tao Kan and Dr. Nawshad Haque.",
+          "story": "",
+          "lessons": "",
+          "skills": []
+        },
+        {
+          "title": "Biotech Manager",
+          "org": "MC³ (Monash Carbon Capture & Conversion)",
+          "when": "Oct 2026 – Present",
+          "summary": "Oversee the biotech side of the team after leading the microalgae growing team since December 2025.",
+          "story": "",
+          "lessons": "",
+          "skills": []
+        },
+        {
+          "title": "Microalgae Growing Team Lead",
+          "org": "MC³ (Monash Carbon Capture & Conversion)",
+          "when": "Dec 2025 – Oct 2026",
+          "summary": "Led a team of six isolating microalgae from Port Phillip Bay water samples, with Melbourne Water as a stakeholder. Built onboarding projects for new members and planned a strain-comparison study.",
+          "story": "",
+          "lessons": "",
+          "skills": ["Team leadership", "Microalgae isolation", "Project planning", "Working with stakeholders", "Onboarding new members"]
+        },
+        {
+          "title": "Lab Trainee",
+          "org": "Monash University",
+          "when": "Jun – Aug 2026",
+          "summary": "Trained in laboratory management under Dr. Yussi Palacios Delgado.",
+          "story": "",
+          "lessons": "",
+          "skills": []
+        }
+      ]
+    },
+    {
+      "title": "Projects",
+      "items": [
+        {
+          "title": "Final Year Project, with Saint-Gobain PAM",
+          "org": "Monash University",
+          "when": "2026",
+          "summary": "Investigating recycled plastic as backfill around buried ductile-iron pipelines, and how surrounding soil affects corrosion. Includes a review of Australian and European standards for pipeline installation.",
+          "story": "",
+          "lessons": "",
+          "skills": ["Corrosion and materials", "Working with AS/NZS and EN standards", "French to English technical translation", "Project planning"]
+        },
+        {
+          "title": "Photoelectrochemical Hydrogen Research",
+          "org": "Undergraduate Research Opportunities Program (UROP), Monash",
+          "when": "",
+          "summary": "",
+          "story": "",
+          "lessons": "",
+          "skills": []
+        }
+      ]
+    },
+    {
+      "title": "Other Experience",
+      "items": [
+        { "title": "Nestlé Manufacturing Malaysia", "org": "", "when": "", "summary": "", "story": "", "lessons": "", "skills": [] },
+        { "title": "Aurora Sailing", "org": "Internship through the Monash Warwick Alliance", "when": "", "summary": "", "story": "", "lessons": "", "skills": [] },
+        { "title": "Marketing Lead", "org": "BrewLab", "when": "", "summary": "", "story": "", "lessons": "", "skills": [] },
+        { "title": "Peer Mentor", "org": "FaME", "when": "", "summary": "", "story": "", "lessons": "", "skills": [] },
+        { "title": "Social impact hackathons", "org": "Monash Generator", "when": "", "summary": "Including the \"Lights Up\" homelessness platform pitch.", "story": "", "lessons": "", "skills": [] },
+        { "title": "Volunteer", "org": "Waterwatch Victoria", "when": "", "summary": "Water quality monitoring along Dandenong Creek.", "story": "", "lessons": "", "skills": [] }
+      ]
+    },
+    {
+      "title": "Education",
+      "items": [
+        {
+          "title": "Bachelor of Chemical Engineering (Honours)",
+          "org": "Monash University, Clayton",
+          "when": "Graduating 2027",
+          "summary": "",
+          "story": "",
+          "lessons": "",
+          "skills": []
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script>
+(function () {
+  // Snapshot of the page before anything is drawn, used when downloading an updated copy.
+  var ORIGINAL = document.documentElement.outerHTML;
+  var data = JSON.parse(document.getElementById('site-data').textContent);
+  var canEdit = /edit/i.test(location.search + location.hash);
+  var editMode = canEdit;
+  var dirty = false;
+  var app = document.getElementById('app');
+
+  function h(tag, props, children) {
+    var e = document.createElement(tag);
+    if (props) {
+      for (var k in props) {
+        var v = props[k];
+        if (v == null || v === false) continue;
+        if (k === 'class') e.className = v;
+        else if (k === 'text') e.textContent = v;
+        else if (k.indexOf('on') === 0) e.addEventListener(k.slice(2), v);
+        else e.setAttribute(k, v === true ? '' : v);
+      }
+    }
+    (children || []).forEach(function (c) {
+      if (c == null) return;
+      e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+    });
+    return e;
+  }
+
+  function noEnter(e) { if (e.key === 'Enter') e.preventDefault(); }
+
+  function field(tag, obj, key, cls, placeholder, multiline) {
+    var val = obj[key] || '';
+    if (!editMode) return val.trim() ? h(tag, { class: cls, text: val }) : null;
+    return h(tag, {
+      class: (cls ? cls + ' ' : '') + 'editable',
+      contenteditable: 'plaintext-only',
+      'data-placeholder': placeholder,
+      text: val,
+      onkeydown: multiline ? null : noEnter,
+      oninput: function (e) { obj[key] = e.target.innerText; dirty = true; }
+    });
+  }
+
+  function skillsField(item) {
+    var skills = item.skills || [];
+    if (!editMode) {
+      if (!skills.length) return null;
+      return h('div', { class: 'chips' }, skills.map(function (s) { return h('span', { class: 'chip', text: s }); }));
+    }
+    return h('div', {
+      class: 'editable',
+      contenteditable: 'plaintext-only',
+      'data-placeholder': 'Skills, separated by commas',
+      text: skills.join(', '),
+      onkeydown: noEnter,
+      oninput: function (e) {
+        item.skills = e.target.innerText.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+        dirty = true;
+      }
+    });
+  }
+
+  function hasDetail(it) {
+    return (it.story || '').trim() || (it.lessons || '').trim() || (it.skills && it.skills.length);
+  }
+
+  function part(label, node) {
+    return node ? h('div', { class: 'detail-part' }, [h('h4', { text: label }), node]) : null;
+  }
+
+  function renderItem(it, list, idx) {
+    var head = [
+      h('div', { class: 'item-top' }, [
+        field('h3', it, 'title', '', 'Role or project'),
+        field('span', it, 'when', 'when', 'Dates')
+      ]),
+      field('div', it, 'org', 'org', 'Organisation'),
+      field('p', it, 'summary', 'summary', 'One or two lines about it', true)
+    ];
+    var detail = h('div', { class: 'detail' }, [
+      part('My story', field('p', it, 'story', 'prose', 'What happened? What did you do, and why did it matter?', true)),
+      part('What I learnt', field('p', it, 'lessons', 'prose', 'What went well, what was hard, and what would you do differently?', true)),
+      part('Skills I built', skillsField(it))
+    ]);
+
+    if (editMode) {
+      var del = h('button', {
+        class: 'del', type: 'button',
+        onclick: function () {
+          if (confirm('Delete this entry?')) { list.splice(idx, 1); dirty = true; render(); }
+        }
+      }, ['Delete entry']);
+      return h('div', { class: 'item open' }, head.concat([detail, del]));
+    }
+
+    if (!hasDetail(it)) return h('div', { class: 'item' }, head);
+
+    var card = h('div', { class: 'item clickable' });
+    var more = h('span', { class: 'more', text: 'Read more' });
+    var btn = h('button', {
+      class: 'item-head', type: 'button', 'aria-expanded': 'false',
+      onclick: function () {
+        var open = card.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        more.textContent = open ? 'Show less' : 'Read more';
+      }
+    }, head.concat([more]));
+    card.appendChild(btn);
+    card.appendChild(detail);
+    return card;
+  }
+
+  function renderSection(sec) {
+    if (!editMode && !sec.items.length) return null;
+    var kids = [field('h2', sec, 'title', '', 'Section name')];
+    sec.items.forEach(function (it, i) { kids.push(renderItem(it, sec.items, i)); });
+    if (editMode) {
+      kids.push(h('button', {
+        class: 'add', type: 'button',
+        onclick: function () {
+          sec.items.push({ title: '', org: '', when: '', summary: '', story: '', lessons: '', skills: [] });
+          dirty = true; render();
+        }
+      }, ['+ Add entry']));
+    }
+    return h('section', null, kids);
+  }
+
+  function input(label, key, ph) {
+    return h('label', { class: 'inp' }, [
+      h('span', { text: label }),
+      h('input', {
+        type: 'text', value: data[key] || '', placeholder: ph,
+        oninput: function (e) { data[key] = e.target.value; dirty = true; }
+      })
+    ]);
+  }
+
+  function renderHeader() {
+    var kids = [
+      field('h1', data, 'name', '', 'Your name'),
+      field('p', data, 'tagline', 'tagline', 'One line about you')
+    ];
+    if (editMode) {
+      kids.push(h('div', { class: 'inputs' }, [
+        input('Email', 'email', 'you@example.com'),
+        input('LinkedIn link', 'linkedin', 'https://www.linkedin.com/in/...'),
+        input('Resume file name', 'resume', 'resume.pdf (leave blank to hide the button)')
+      ]));
+    } else {
+      var links = [];
+      if ((data.email || '').trim()) links.push(h('a', { href: 'mailto:' + data.email.trim() }, ['Email']));
+      if ((data.linkedin || '').trim()) links.push(h('a', { href: data.linkedin.trim(), target: '_blank', rel: 'noopener' }, ['LinkedIn']));
+      if ((data.resume || '').trim()) links.push(h('a', { href: data.resume.trim(), target: '_blank', rel: 'noopener' }, ['Resume (PDF)']));
+      if (links.length) kids.push(h('div', { class: 'links' }, links));
+    }
+    return h('header', null, kids);
+  }
+
+  function renderBar() {
+    if (!canEdit) return null;
+    return h('div', { class: 'bar' }, [
+      h('span', { text: editMode ? 'Editing. Nothing changes online until you upload the downloaded file.' : 'Previewing your changes.' }),
+      h('div', { class: 'bar-btns' }, [
+        h('button', { class: 'ghost', type: 'button', onclick: function () { editMode = !editMode; render(); } }, [editMode ? 'Preview' : 'Keep editing']),
+        h('button', { type: 'button', onclick: download }, ['Download index.html'])
+      ])
+    ]);
+  }
+
+  function render() {
+    var name = (data.name || '').trim();
+    document.title = name || 'Portfolio';
+    var anyDetail = data.sections.some(function (s) { return s.items.some(hasDetail); });
+    var aboutText = field('p', data, 'about', 'prose', 'A few lines about you', true);
+    var wrapKids = [renderHeader()];
+    if (aboutText) wrapKids.push(h('section', null, [h('h2', { text: 'About' }), aboutText]));
+    if (!editMode && anyDetail) wrapKids.push(h('p', { class: 'hint', text: 'Click an entry to read the story behind it.' }));
+    data.sections.forEach(function (s) { wrapKids.push(renderSection(s)); });
+    wrapKids.push(h('footer', { text: '© ' + new Date().getFullYear() + (name ? ' ' + name : '') }));
+    app.replaceChildren(h('div', { class: 'wrap' + (canEdit ? ' has-bar' : '') }, wrapKids));
+    var bar = renderBar();
+    if (bar) app.appendChild(bar);
+  }
+
+  function tidy(s) { return (s || '').replace(/\u00a0/g, ' ').trim(); }
+
+  function cleaned() {
+    var c = JSON.parse(JSON.stringify(data));
+    ['name', 'tagline', 'email', 'linkedin', 'resume', 'about'].forEach(function (k) { c[k] = tidy(c[k]); });
+    c.sections.forEach(function (s) {
+      s.title = tidy(s.title);
+      s.items = s.items.map(function (it) {
+        return {
+          title: tidy(it.title), org: tidy(it.org), when: tidy(it.when),
+          summary: tidy(it.summary), story: tidy(it.story), lessons: tidy(it.lessons),
+          skills: (it.skills || []).map(tidy).filter(Boolean)
+        };
+      }).filter(function (it) { return it.title || it.org || it.summary || it.story || it.lessons; });
+    });
+    return c;
+  }
+
+  function escHtml(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  function download() {
+    var c = cleaned();
+    var json = JSON.stringify(c, null, 2).replace(/</g, '\\u003c');
+    var out = ORIGINAL.replace(
+      /(<script id="site-data" type="application\/json">)[\s\S]*?(<\/script>)/,
+      function (m, a, b) { return a + '\n' + json + '\n' + b; }
+    );
+    out = out.replace(/<title>[\s\S]*?<\/title>/, function () { return '<title>' + escHtml(c.name || 'Portfolio') + '</title>'; });
+    out = '<!DOCTYPE html>\n' + out;
+    var blob = new Blob([out], { type: 'text/html' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'index.html';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+    dirty = false;
+  }
+
+  window.addEventListener('beforeunload', function (e) {
+    if (canEdit && dirty) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
