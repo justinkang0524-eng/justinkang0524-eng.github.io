@@ -66,6 +66,19 @@
     color: var(--accent); font-weight: 600; margin-bottom: 18px;
   }
   .hint { color: var(--muted); font-size: 0.92rem; margin-top: 28px; }
+
+  /* About section with photo */
+  .about-row { display: flex; gap: 28px; align-items: flex-start; }
+  .about-row > .prose { flex: 1; min-width: 0; }
+  .photo {
+    width: 160px; height: 160px; flex-shrink: 0; border-radius: 50%;
+    object-fit: cover; border: 1px solid var(--line); background: var(--card);
+  }
+  @media (max-width: 600px) {
+    .about-row { flex-direction: column; align-items: center; gap: 20px; }
+    .about-row > .prose { width: 100%; }
+    .photo { width: 140px; height: 140px; }
+  }
   .prose, .summary { white-space: pre-line; }
 
   /* Cards */
@@ -640,6 +653,7 @@
       });
     });
     if (typeof d.interestsIntro !== 'string') d.interestsIntro = DEFAULT_INTRO;
+    if (typeof d.photo !== 'string') d.photo = '';
     d.interests = d.interests || [];
     var usedPosts = {};
     d.interests.forEach(function (p) {
@@ -772,7 +786,11 @@
       header.push(h('div', { class: 'inputs' }, [
         input('Email', data, 'email', 'you@example.com'),
         input('LinkedIn link', data, 'linkedin', 'https://www.linkedin.com/in/...'),
-        input('Resume file name', data, 'resume', 'resume.pdf (leave blank to hide the button)')
+        input('Resume file name', data, 'resume', 'resume.pdf (leave blank to hide the button)'),
+        input('Photo file name', data, 'photo', 'photo.jpg (upload it to GitHub first, leave blank to hide)', function () {
+          var slot = document.getElementById('photo-slot');
+          if (slot) { slot.replaceChildren(); var img = photoImg(); if (img) slot.appendChild(img); }
+        })
       ]));
     } else if (!editMode) {
       var links = [];
@@ -838,10 +856,25 @@
     return h('section', null, kids);
   }
 
+  function photoImg() {
+    var src = safeUrl(data.photo);
+    if (!src) return null;
+    return h('img', {
+      class: 'photo', src: src, alt: 'Photo of ' + (tidy(data.name) || 'me'),
+      onerror: function () { this.style.display = 'none'; }
+    });
+  }
+
   function renderHome() {
     var kids = renderTop('experience');
     var about = field('p', data, 'about', 'prose', 'A few lines about you', true);
-    if (about) kids.push(h('section', null, [h('h2', { text: 'About' }), about]));
+    var img = photoImg();
+    if (about || img) {
+      var row = editMode
+        ? [h('div', { id: 'photo-slot' }, [img]), about]
+        : [img, about];
+      kids.push(h('section', null, [h('h2', { text: 'About' }), h('div', { class: 'about-row' }, row)]));
+    }
     if (!editMode) kids.push(h('p', { class: 'hint', text: 'Click any entry to see what I did, what I learnt, and my diary from it.' }));
     data.sections.forEach(function (s) { kids.push(renderSection(s)); });
 
@@ -1116,7 +1149,7 @@
 
   function cleaned() {
     var c = JSON.parse(JSON.stringify(data));
-    ['name', 'tagline', 'email', 'linkedin', 'resume', 'about', 'interestsIntro'].forEach(function (k) { c[k] = tidy(c[k]); });
+    ['name', 'tagline', 'email', 'linkedin', 'resume', 'photo', 'about', 'interestsIntro'].forEach(function (k) { c[k] = tidy(c[k]); });
     var used = { interests: true };
     c.sections.forEach(function (s) {
       s.title = tidy(s.title);
