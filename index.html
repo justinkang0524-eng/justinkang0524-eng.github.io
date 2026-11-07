@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Justin Kang</title>
 <meta name="description" content="Chemical Engineering Honours student at Monash University.">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #fafaf8;
@@ -39,7 +40,7 @@
   a { color: var(--accent); }
   .wrap { max-width: 760px; margin: 0 auto; padding: 64px 20px 80px; }
   .wrap.has-bar { padding-bottom: 170px; }
-  header { margin-bottom: 40px; }
+  header { margin-bottom: 8px; }
   h1 { font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
   .tagline { font-size: 1.1rem; color: var(--muted); margin-top: 6px; }
   .links { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
@@ -49,6 +50,16 @@
     font-size: 0.92rem;
   }
   .links a:hover { border-color: var(--accent); }
+
+  /* Tabs between Experience and Interests */
+  .nav { display: flex; gap: 24px; margin-top: 32px; border-bottom: 1px solid var(--line); }
+  .nav a {
+    padding: 8px 0; text-decoration: none; color: var(--muted); font-weight: 600;
+    font-size: 0.95rem; border-bottom: 2px solid transparent; margin-bottom: -1px;
+  }
+  .nav a:hover { color: var(--text); }
+  .nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
   section { margin-top: 44px; }
   h2 {
     font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em;
@@ -57,7 +68,7 @@
   .hint { color: var(--muted); font-size: 0.92rem; margin-top: 28px; }
   .prose, .summary { white-space: pre-line; }
 
-  /* Cards on the home page */
+  /* Cards */
   .item {
     display: block; background: var(--card); border: 1px solid var(--line);
     border-radius: 10px; padding: 18px 20px; margin-bottom: 14px;
@@ -71,8 +82,10 @@
   .org { color: var(--muted); font-size: 0.95rem; }
   .summary { margin-top: 8px; font-size: 0.96rem; }
   .more { display: inline-block; margin-top: 10px; color: var(--accent); font-size: 0.9rem; font-weight: 500; }
+  .see-all { display: inline-block; margin-top: 4px; font-weight: 500; font-size: 0.92rem; text-decoration: none; }
+  .see-all:hover { text-decoration: underline; }
 
-  /* Experience page */
+  /* Experience and post pages */
   .back {
     display: inline-block; color: var(--accent); text-decoration: none;
     font-weight: 500; font-size: 0.92rem; margin-bottom: 28px;
@@ -83,10 +96,19 @@
   .page-summary { margin-top: 20px; font-size: 1.05rem; white-space: pre-line; }
   .page h1 { font-size: 2.1rem; }
   .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .chip {
-    background: var(--accent-soft); color: var(--accent);
+  .chip, .topic {
+    display: inline-block; background: var(--accent-soft); color: var(--accent);
     padding: 3px 10px; border-radius: 999px; font-size: 0.85rem; font-weight: 500;
   }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 10px; color: var(--muted); font-size: 0.92rem; }
+  .card-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 8px; color: var(--muted); font-size: 0.85rem; }
+  .card-meta .topic { font-size: 0.78rem; padding: 2px 9px; }
+  .video {
+    position: relative; width: 100%; aspect-ratio: 16 / 9; margin-top: 24px;
+    border-radius: 10px; overflow: hidden; background: #000;
+  }
+  .video iframe, .video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .post-body { margin-top: 24px; font-size: 1.02rem; white-space: pre-line; }
   .empty { color: var(--muted); margin-top: 32px; }
   .diary-entry {
     border-left: 2px solid var(--line); padding: 2px 0 2px 18px; margin-bottom: 22px;
@@ -97,7 +119,7 @@
     border-radius: 50%; background: var(--accent);
   }
   .diary-date { font-size: 0.85rem; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
-  .diary-date input {
+  .diary-date input, .date-input {
     font: inherit; color: var(--text); background: var(--card);
     border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px;
   }
@@ -113,6 +135,7 @@
   .editable:hover { outline-color: var(--muted); }
   .editable:focus { outline: 2px solid var(--accent); }
   .editable:empty::before { content: attr(data-placeholder); color: var(--muted); font-weight: 400; }
+  .topic.editable { margin: 0; padding: 3px 10px; }
   .inputs { display: grid; gap: 10px; margin-top: 20px; }
   .inp { display: grid; gap: 4px; font-size: 0.85rem; color: var(--muted); }
   .inp input {
@@ -318,8 +341,7 @@
           "lessons": "I’m still in the middle of this project, but a few things have already stood out.\n\nFirst, soil is far more complicated than I expected. Two samples that look the same can behave completely differently once water and salt get involved. That’s made me much more careful about not jumping to conclusions from one result.\n\nSecond, good research has to be useful to someone. The people who will use my findings, like councils, utilities and contractors, aren’t corrosion experts. Learning to explain my results in plain language has been as important as getting the results.\n\nI’ll update this once the project is finished.",
           "skills": [
             "Corrosion testing",
-            "Electrochemical methods (EIS",
-            "polarisation)",
+            "Electrochemical methods (EIS, polarisation)",
             "Soil characterisation",
             "Design of experiments",
             "Data analysis",
@@ -348,9 +370,7 @@
           "lessons": "This was my first taste of real research, and the biggest surprise was that “hotter” or “more” isn’t always better. The best result came from the middle of the range, not the extreme. It taught me to let the data lead rather than going in with a guess.\n\nI also learnt how much careful work sits behind one clean graph. Making 16 different samples and testing each one meant keeping very good records, or the results would have been useless.\n\nWorking with another student’s data showed me that research is a team effort. Combining our results gave a clearer answer than either of us had alone.",
           "skills": [
             "Material synthesis",
-            "Electrochemical testing (EIS",
-            "Mott-Schottky",
-            "LSV)",
+            "Electrochemical testing (EIS, Mott-Schottky, LSV)",
             "Data analysis",
             "Experimental design",
             "Technical report writing",
@@ -521,7 +541,9 @@
         }
       ]
     }
-  ]
+  ],
+  "interestsIntro": "Things I'm curious about outside my degree. Some are short notes, some are videos, all of them are things I keep thinking about.",
+  "interests": []
 }
 </script>
 
@@ -534,6 +556,8 @@
   var editMode = canEdit;
   var dirty = false;
   var app = document.getElementById('app');
+
+  var DEFAULT_INTRO = "Things I'm curious about outside my degree. Some are short notes, some are videos, all of them are things I keep thinking about.";
 
   /* ---------- helpers ---------- */
 
@@ -565,26 +589,66 @@
       .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 50) || 'entry';
   }
 
+  // Split "A, B (C, D), E" into ["A", "B (C, D)", "E"], keeping commas inside brackets.
+  function splitSkills(str) {
+    var out = [], cur = '', depth = 0;
+    for (var i = 0; i < str.length; i++) {
+      var ch = str[i];
+      if (ch === '(' || ch === '[') depth++;
+      else if ((ch === ')' || ch === ']') && depth > 0) depth--;
+      if (ch === ',' && depth === 0) { out.push(cur); cur = ''; }
+      else cur += ch;
+    }
+    out.push(cur);
+    return out.map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+
+  // Fix skills that were split in the middle of brackets by older versions.
+  function repairSkills(arr) {
+    var out = [], buf = null;
+    function balance(s) { return (s.match(/\(/g) || []).length - (s.match(/\)/g) || []).length; }
+    arr.forEach(function (s) {
+      buf = buf === null ? s : buf + ', ' + s;
+      if (balance(buf) <= 0) { out.push(buf); buf = null; }
+    });
+    if (buf !== null) out.push(buf);
+    return out;
+  }
+
   function allItems() {
     var out = [];
     data.sections.forEach(function (s) { s.items.forEach(function (it) { out.push(it); }); });
     return out;
   }
 
-  // Make older saved files work with this version: add ids and diaries where missing.
+  // Make older saved files work with this version.
   function upgrade(d) {
     var used = {};
+    d.sections = d.sections || [];
     d.sections.forEach(function (s) {
+      s.items = s.items || [];
       s.items.forEach(function (it) {
-        it.skills = it.skills || [];
+        it.skills = repairSkills(it.skills || []);
         it.diary = it.diary || [];
         ['title', 'org', 'when', 'summary', 'story', 'lessons'].forEach(function (k) { it[k] = it[k] || ''; });
         var id = it.id || slugify(it.org ? it.org + ' ' + it.title : it.title);
+        if (id === 'interests') id = 'interests-entry';
         var base = id, n = 2;
         while (used[id]) id = base + '-' + (n++);
         used[id] = true;
         it.id = id;
       });
+    });
+    if (typeof d.interestsIntro !== 'string') d.interestsIntro = DEFAULT_INTRO;
+    d.interests = d.interests || [];
+    var usedPosts = {};
+    d.interests.forEach(function (p) {
+      ['title', 'date', 'topic', 'video', 'text'].forEach(function (k) { p[k] = p[k] || ''; });
+      var id = p.id || slugify(p.title) || 'post';
+      var base = id, n = 2;
+      while (usedPosts[id]) id = base + '-' + (n++);
+      usedPosts[id] = true;
+      p.id = id;
     });
     return d;
   }
@@ -594,6 +658,15 @@
     var list = allItems();
     for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
     return null;
+  }
+
+  function findPost(id) {
+    for (var i = 0; i < data.interests.length; i++) if (data.interests[i].id === id) return data.interests[i];
+    return null;
+  }
+
+  function sortedPosts() {
+    return data.interests.slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
   }
 
   function route() {
@@ -612,6 +685,40 @@
   function today() {
     var d = new Date();
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  function excerpt(s, n) {
+    s = tidy(s).replace(/\s+/g, ' ');
+    return s.length > n ? s.slice(0, n).replace(/\s+\S*$/, '') + '…' : s;
+  }
+
+  // Only allow web links (https://...) or a plain file name in the same folder.
+  function safeUrl(url) {
+    url = tidy(url);
+    if (/^https?:\/\//i.test(url)) return url;
+    if (/^[\w./-]+$/.test(url) && url.indexOf('..') === -1) return url;
+    return '';
+  }
+
+  // Turn a YouTube, Vimeo or video file link into a player.
+  function videoEmbed(raw) {
+    var url = safeUrl(raw);
+    if (!url) return null;
+    var m, src = null;
+    if ((m = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/))) {
+      src = 'https://www.youtube-nocookie.com/embed/' + m[1];
+    } else if ((m = url.match(/vimeo\.com\/(?:video\/)?(\d+)/))) {
+      src = 'https://player.vimeo.com/video/' + m[1];
+    } else if (/\.(mp4|webm|m4v|mov)(\?.*)?$/i.test(url)) {
+      return h('div', { class: 'video' }, [h('video', { src: url, controls: true, preload: 'metadata', playsinline: true })]);
+    } else {
+      return h('p', { class: 'meta' }, [h('a', { href: url, target: '_blank', rel: 'noopener' }, ['Watch the video →'])]);
+    }
+    return h('div', { class: 'video' }, [h('iframe', {
+      src: src, title: 'Video', loading: 'lazy', allowfullscreen: true,
+      allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+      referrerpolicy: 'strict-origin-when-cross-origin'
+    })]);
   }
 
   /* ---------- editable pieces ---------- */
@@ -640,24 +747,48 @@
       'data-placeholder': 'Skills, separated by commas',
       text: item.skills.join(', '),
       onkeydown: noEnter,
-      oninput: function (e) {
-        item.skills = e.target.innerText.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
-        dirty = true;
-      }
+      oninput: function (e) { item.skills = splitSkills(e.target.innerText); dirty = true; }
     });
   }
 
-  function input(label, key, ph) {
+  function input(label, obj, key, ph, onChange) {
     return h('label', { class: 'inp' }, [
       h('span', { text: label }),
       h('input', {
-        type: 'text', value: data[key] || '', placeholder: ph,
-        oninput: function (e) { data[key] = e.target.value; dirty = true; }
+        type: 'text', value: obj[key] || '', placeholder: ph,
+        oninput: function (e) { obj[key] = e.target.value; dirty = true; if (onChange) onChange(); }
       })
     ]);
   }
 
-  /* ---------- home page ---------- */
+  /* ---------- shared top of the site ---------- */
+
+  function renderTop(active) {
+    var header = [
+      field('h1', data, 'name', '', 'Your name'),
+      field('p', data, 'tagline', 'tagline', 'One line about you')
+    ];
+    if (editMode && active === 'experience') {
+      header.push(h('div', { class: 'inputs' }, [
+        input('Email', data, 'email', 'you@example.com'),
+        input('LinkedIn link', data, 'linkedin', 'https://www.linkedin.com/in/...'),
+        input('Resume file name', data, 'resume', 'resume.pdf (leave blank to hide the button)')
+      ]));
+    } else if (!editMode) {
+      var links = [];
+      if (tidy(data.email)) links.push(h('a', { href: 'mailto:' + tidy(data.email) }, ['Email']));
+      if (safeUrl(data.linkedin)) links.push(h('a', { href: safeUrl(data.linkedin), target: '_blank', rel: 'noopener' }, ['LinkedIn']));
+      if (safeUrl(data.resume)) links.push(h('a', { href: safeUrl(data.resume), target: '_blank', rel: 'noopener' }, ['Resume (PDF)']));
+      if (links.length) header.push(h('div', { class: 'links' }, links));
+    }
+    var nav = h('nav', { class: 'nav', 'aria-label': 'Sections' }, [
+      h('a', { href: '#/', class: active === 'experience' ? 'active' : null }, ['Experience']),
+      h('a', { href: '#/interests', class: active === 'interests' ? 'active' : null }, ['Interests'])
+    ]);
+    return [h('header', null, header), nav];
+  }
+
+  /* ---------- home page (experience) ---------- */
 
   function renderCard(it, list, idx) {
     var head = [
@@ -708,29 +839,20 @@
   }
 
   function renderHome() {
-    var header = [
-      field('h1', data, 'name', '', 'Your name'),
-      field('p', data, 'tagline', 'tagline', 'One line about you')
-    ];
-    if (editMode) {
-      header.push(h('div', { class: 'inputs' }, [
-        input('Email', 'email', 'you@example.com'),
-        input('LinkedIn link', 'linkedin', 'https://www.linkedin.com/in/...'),
-        input('Resume file name', 'resume', 'resume.pdf (leave blank to hide the button)')
-      ]));
-    } else {
-      var links = [];
-      if (tidy(data.email)) links.push(h('a', { href: 'mailto:' + tidy(data.email) }, ['Email']));
-      if (tidy(data.linkedin)) links.push(h('a', { href: tidy(data.linkedin), target: '_blank', rel: 'noopener' }, ['LinkedIn']));
-      if (tidy(data.resume)) links.push(h('a', { href: tidy(data.resume), target: '_blank', rel: 'noopener' }, ['Resume (PDF)']));
-      if (links.length) header.push(h('div', { class: 'links' }, links));
-    }
-
-    var kids = [h('header', null, header)];
+    var kids = renderTop('experience');
     var about = field('p', data, 'about', 'prose', 'A few lines about you', true);
     if (about) kids.push(h('section', null, [h('h2', { text: 'About' }), about]));
     if (!editMode) kids.push(h('p', { class: 'hint', text: 'Click any entry to see what I did, what I learnt, and my diary from it.' }));
     data.sections.forEach(function (s) { kids.push(renderSection(s)); });
+
+    // A peek at the latest interests, so visitors know the page exists.
+    var latest = sortedPosts().filter(function (p) { return tidy(p.title); }).slice(0, 2);
+    if (!editMode && latest.length) {
+      var teaser = [h('h2', { text: 'Latest from my interests' })];
+      latest.forEach(function (p) { teaser.push(postCard(p)); });
+      teaser.push(h('a', { class: 'see-all', href: '#/interests' }, ['See all interests →']));
+      kids.push(h('section', null, teaser));
+    }
     return kids;
   }
 
@@ -812,6 +934,117 @@
     return [h('div', { class: 'page' }, kids)];
   }
 
+  /* ---------- interests ---------- */
+
+  function postHref(p) { return '#/interests/' + encodeURIComponent(p.id); }
+
+  function postCard(p) {
+    var meta = [];
+    if (p.date) meta.push(h('span', { text: formatDate(p.date) }));
+    if (tidy(p.topic)) meta.push(h('span', { class: 'topic', text: tidy(p.topic) }));
+    if (safeUrl(p.video)) meta.push(h('span', { text: '▶ Video' }));
+    var kids = [
+      h('h3', { text: tidy(p.title) || 'Untitled post' }),
+      meta.length ? h('div', { class: 'card-meta' }, meta) : null,
+      tidy(p.text) ? h('p', { class: 'summary', text: excerpt(p.text, 180) }) : null
+    ];
+    if (editMode) {
+      return h('div', { class: 'item' }, kids.concat([
+        h('div', { class: 'row-btns' }, [
+          h('a', { class: 'open-page', href: postHref(p) }, ['Open to edit →']),
+          h('button', {
+            class: 'del', type: 'button',
+            onclick: function () {
+              if (confirm('Delete this post?')) {
+                data.interests.splice(data.interests.indexOf(p), 1); dirty = true; render();
+              }
+            }
+          }, ['Delete'])
+        ])
+      ]));
+    }
+    return h('a', { class: 'item', href: postHref(p) }, kids.concat([h('span', { class: 'more', text: 'Read →' })]));
+  }
+
+  function renderInterests() {
+    var kids = renderTop('interests');
+    var intro = field('p', data, 'interestsIntro', 'prose', 'A line or two about what this page is for', true);
+    var sec = [h('h2', { text: 'Interests' })];
+    if (intro) sec.push(intro);
+    kids.push(h('section', null, sec));
+
+    var list = [];
+    if (editMode) {
+      list.push(h('button', {
+        class: 'add', type: 'button', style: 'margin-bottom:18px',
+        onclick: function () {
+          var p = { id: 'post-' + Date.now().toString(36), title: '', date: today(), topic: '', video: '', text: '' };
+          data.interests.push(p);
+          dirty = true;
+          location.hash = postHref(p);
+        }
+      }, ['+ New post']));
+    }
+    var posts = sortedPosts().filter(function (p) { return editMode || tidy(p.title) || tidy(p.text) || safeUrl(p.video); });
+    posts.forEach(function (p) { list.push(postCard(p)); });
+    if (!posts.length && !editMode) list.push(h('p', { class: 'empty', text: 'First post coming soon.' }));
+    kids.push(h('section', { style: 'margin-top:28px' }, list));
+    return kids;
+  }
+
+  function renderPost(p) {
+    var posts = sortedPosts();
+    var i = posts.indexOf(p);
+    var newer = posts[i - 1], older = posts[i + 1];
+
+    var kids = [h('a', { class: 'back', href: '#/interests' }, ['← Back to interests'])];
+    kids.push(field('h1', p, 'title', '', 'Post title'));
+
+    if (editMode) {
+      kids.push(h('div', { class: 'meta' }, [
+        h('input', {
+          class: 'date-input', type: 'date', value: p.date || '',
+          oninput: function (e) { p.date = e.target.value; dirty = true; }
+        }),
+        field('span', p, 'topic', 'topic', 'Topic, e.g. Energy')
+      ]));
+      var preview = h('div', null, [videoEmbed(p.video)]);
+      kids.push(h('div', { class: 'inputs' }, [
+        input('Video link (optional): YouTube, Vimeo, or an .mp4 file name', p, 'video', 'https://www.youtube.com/watch?v=...', function () {
+          preview.replaceChildren();
+          var v = videoEmbed(p.video);
+          if (v) preview.appendChild(v);
+        })
+      ]));
+      kids.push(preview);
+      kids.push(field('div', p, 'text', 'post-body', 'Write your thoughts, a video script, or notes on what you learnt...', true));
+      kids.push(h('div', { class: 'row-btns', style: 'margin-top:28px' }, [
+        h('button', {
+          class: 'del', type: 'button',
+          onclick: function () {
+            if (confirm('Delete this post?')) {
+              data.interests.splice(data.interests.indexOf(p), 1); dirty = true; location.hash = '#/interests';
+            }
+          }
+        }, ['Delete post'])
+      ]));
+    } else {
+      var meta = [];
+      if (p.date) meta.push(h('span', { text: formatDate(p.date) }));
+      if (tidy(p.topic)) meta.push(h('span', { class: 'topic', text: tidy(p.topic) }));
+      if (meta.length) kids.push(h('div', { class: 'meta' }, meta));
+      kids.push(videoEmbed(p.video));
+      if (tidy(p.text)) kids.push(h('div', { class: 'post-body', text: p.text }));
+    }
+
+    var nav = [];
+    nav.push(older ? h('a', { href: postHref(older) }, ['← ' + (tidy(older.title) || 'Older post')]) : h('span'));
+    if (newer) nav.push(h('a', { href: postHref(newer) }, [(tidy(newer.title) || 'Newer post') + ' →']));
+    kids.push(h('div', { class: 'page-nav' }, nav));
+
+    return [h('div', { class: 'page' }, kids)];
+  }
+
   /* ---------- edit bar ---------- */
 
   function loadFromFile() {
@@ -854,11 +1087,23 @@
 
   function render() {
     var name = tidy(data.name);
-    var id = route();
-    var it = id ? findItem(id) : null;
-    document.title = it ? (tidy(it.title) || 'Experience') + (name ? ' | ' + name : '') : (name || 'Portfolio');
+    var r = route();
+    var kids, title;
 
-    var kids = it ? renderPage(it) : renderHome();
+    if (r === 'interests') {
+      kids = renderInterests();
+      title = 'Interests';
+    } else if (r && r.indexOf('interests/') === 0) {
+      var p = findPost(r.slice('interests/'.length));
+      if (p) { kids = renderPost(p); title = tidy(p.title) || 'Interests'; }
+      else { kids = renderInterests(); title = 'Interests'; }
+    } else {
+      var it = r ? findItem(r) : null;
+      if (it) { kids = renderPage(it); title = tidy(it.title) || 'Experience'; }
+      else { kids = renderHome(); title = null; }
+    }
+
+    document.title = title ? title + (name ? ' | ' + name : '') : (name || 'Portfolio');
     kids.push(h('footer', { text: '© ' + new Date().getFullYear() + (name ? ' ' + name : '') }));
     app.replaceChildren(h('div', { class: 'wrap' + (canEdit ? ' has-bar' : '') }, kids));
     var bar = renderBar();
@@ -871,8 +1116,8 @@
 
   function cleaned() {
     var c = JSON.parse(JSON.stringify(data));
-    ['name', 'tagline', 'email', 'linkedin', 'resume', 'about'].forEach(function (k) { c[k] = tidy(c[k]); });
-    var used = {};
+    ['name', 'tagline', 'email', 'linkedin', 'resume', 'about', 'interestsIntro'].forEach(function (k) { c[k] = tidy(c[k]); });
+    var used = { interests: true };
     c.sections.forEach(function (s) {
       s.title = tidy(s.title);
       s.items = s.items.map(function (it) {
@@ -894,6 +1139,15 @@
         return it.title || it.org || it.summary || it.story || it.lessons || it.diary.length;
       });
     });
+    var usedPosts = {};
+    c.interests = (c.interests || []).map(function (p) {
+      var out = { id: p.id, title: tidy(p.title), date: p.date || '', topic: tidy(p.topic), video: tidy(p.video), text: tidy(p.text) };
+      if (/^post-/.test(out.id) && out.title) out.id = slugify(out.title);
+      var base = out.id, n = 2;
+      while (usedPosts[out.id]) out.id = base + '-' + (n++);
+      usedPosts[out.id] = true;
+      return out;
+    }).filter(function (p) { return p.title || p.text || p.video; });
     return c;
   }
 
@@ -907,7 +1161,7 @@
       function (m, a, b) { return a + '\n' + json + '\n' + b; }
     );
     out = out.replace(/<title>[\s\S]*?<\/title>/, function () { return '<title>' + escHtml(c.name || 'Portfolio') + '</title>'; });
-    out = '<!DOCTYPE html>\n' + out;
+    out = '<!DOCTYPE html>\n' + out.replace(/^<!DOCTYPE html>\s*/i, '');
     var blob = new Blob([out], { type: 'text/html' });
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -925,4 +1179,6 @@
 
   render();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
