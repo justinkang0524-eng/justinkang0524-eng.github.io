@@ -117,6 +117,17 @@
     border-radius: 10px; border: 1px solid var(--line); background: var(--card);
   }
   .more-chip { background: none; border: 1px solid var(--line); color: var(--muted); }
+  .move {
+    background: var(--card); border: 1px solid var(--line); border-radius: 6px;
+    padding: 2px 10px; font-size: 0.85rem; color: var(--accent); font-weight: 500;
+  }
+  .move:hover:not(:disabled) { border-color: var(--accent); }
+  .move:disabled { opacity: 0.35; cursor: default; }
+  .section-tools {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    margin: -8px 0 16px; font-size: 0.85rem; color: var(--muted);
+  }
+  .row-btns { align-items: center; }
   .link-btn {
     display: inline-block; padding: 10px 18px; border-radius: 8px; border: 1px solid var(--accent);
     text-decoration: none; font-weight: 600; font-size: 0.95rem;
@@ -262,6 +273,7 @@
           "title": "Vacation Student",
           "org": "CSIRO Mineral Resources",
           "when": "Nov 2026 – Feb 2027",
+          "logo": "csiro.jpg",
           "summary": "Techno-economic evaluation of pyrometallurgical routes for processing antimony, a critical mineral. Supervised by Dr. Tao Kan and Dr. Nawshad Haque.",
           "story": "Starting in November, I’ll be spending my summer at CSIRO Mineral Resources looking at antimony. It’s a metal most people have never heard of, but it ends up in flame retardants, batteries and solar panel glass. Australia lists it as a critical mineral, and most of the world’s supply currently comes from a handful of countries.\n\nMy job is to compare different high-temperature (pyrometallurgical) ways of turning antimony ore into usable metal, and work out what each one would really cost to build and run. The goal is to help answer a simple question: could Australia process more of its own antimony, and which way makes the most sense?",
           "lessons": "I haven’t started yet, so this is what I’m going in curious about:\n\n1. How engineers decide between processes when every option has trade-offs in cost, energy and waste\n2. What a real techno-economic study looks like, beyond the simplified versions we do at uni\nHow research at CSIRO connects to decisions made by industry and government\n\nI’ll come back and update this with what I actually learnt.",
@@ -278,14 +290,14 @@
               "date": "2026-09-01",
               "text": "Got the news that I’d been offered a vacation studentship at CSIRO. To prepare for the interview, I put together my own comparison of the main ways antimony gets processed, just to understand the options before walking in. Now that I’ve got the role, I’m keen to see how close my early thinking was to how the experts actually approach it."
             }
-          ],
-          "logo": "csiro.jpg"
+          ]
         },
         {
           "id": "mc3-biotech-manager",
           "title": "Biotech Manager",
           "org": "MC³ (Monash Carbon Capture & Conversion)",
           "when": "Oct 2026 – Present",
+          "logo": "mc3.png",
           "summary": "Oversee the biotech side of the team after leading the microalgae growing team since December 2025.",
           "story": "MC³ is a student engineering team at Monash Clayton working on ways to capture carbon and turn it into something useful.\n\nI started out growing microalgae, then led the growing team, and now I look after the whole biotech side of the team. That’s three subteams: microalgae growing, photobioreactors (the systems we grow algae in) and biochar.\n\nMost of my week is spent keeping those three teams moving in the same direction. I set goals for each subteam every semester with the MC³ executives, run whole-team meetings, and report our progress to the executives and our academic advisors.\n\nI also run recruitment, from interviews and choosing new members to getting them set up with inductions and resources. Just as important, I check in with members regularly, collect feedback, and keep my door open, because a team only works if people want to stay in it.",
           "lessons": "I’m still new to this role, but the biggest shift so far has been going from doing the lab work myself to helping other people do it well.\n\nWhen I was growing algae, a good day meant a clean sample. Now a good day might mean a new member feels confident in their first week, or two subteams realise they can help each other. It’s a different kind of problem solving, and I’m finding it just as interesting.\n\nI’ll keep adding to this as I go.",
@@ -303,14 +315,14 @@
               "date": "2026-10-12",
               "text": "Stepped up from leading the microalgae growing team to Biotech Manager. I now look after three subteams instead of one, which means learning how photobioreactors and biochar work in enough depth to support the people working on them. First job: setting goals for each subteam for next semester."
             }
-          ],
-          "logo": "mc3.png"
+          ]
         },
         {
           "id": "mc3-team-lead",
           "title": "Microalgae Growing Team Lead",
           "org": "MC³ (Monash Carbon Capture & Conversion)",
           "when": "Dec 2025 – Oct 2026",
+          "logo": "mc3.png",
           "summary": "Led a team of six isolating microalgae from Port Phillip Bay water samples, with Melbourne Water as a stakeholder. Built onboarding projects for new members and planned a strain-comparison study.",
           "story": "I joined MC³ as a microalgae growing engineer. Our job was to find local microalgae worth studying, which meant collecting water from Port Phillip Bay and pulling single strains out of very messy samples.\n\nMy first big task was designing a vessel to carry these samples from the field back to the lab without killing what was inside. Melbourne Water was one of the stakeholders relying on those samples, so keeping them alive and clean mattered. I also wrote the lab steps we used to isolate and purify each strain.\n\nIn July 2026 I took over as lead of the growing team. I ran the team’s day-to-day work, interviewed and chose new members, and built onboarding projects so new people could get started quickly. I also helped shape where the team was heading: studying local strains to better understand harmful algal blooms in Melbourne’s waterways, looking at possible industry partners, and working towards publishing research with our academic supervisors.\n\nAs the team moved into water-quality research, I ran peer reviews of every new setup and design to make sure it was safe before anyone used it.",
           "lessons": "The biggest lesson was that good lab work starts long before the lab. If a sample isn’t handled properly on the way back from the bay, nothing you do afterwards can save it. Designing the transport vessel taught me to think about the whole process, not just the interesting part.\n\nMoving from engineer to lead taught me something different. I couldn’t do every experiment myself anymore, so my job became making sure other people could do them well. That meant clear lab steps, good onboarding, and checking each other’s work before anything went wrong.\n\nIf I did it again, I’d write things down earlier. A lot of what we knew lived in people’s heads, and that made it hard for new members to catch up.",
@@ -334,14 +346,14 @@
               "date": "2025-11-01",
               "text": "Joined MC³ as a microalgae growing engineer. First challenge: working out how to get living samples from Port Phillip Bay back to the lab in one piece."
             }
-          ],
-          "logo": "mc3.png"
+          ]
         },
         {
           "id": "monash-lab-trainee",
           "title": "Lab Trainee",
           "org": "Monash University",
           "when": "Jun – Sep 2026",
+          "logo": "monash.png",
           "summary": "Trained in laboratory management under Dr. Yussi Palacios Delgado.",
           "story": "Before I took over the microalgae growing team at MC³, I spent four months training in the lab of Dr. Yussi Palacios Delgado at Monash. Her research looks at how biology and engineering can work together to clean water, from stormwater filters to microalgae, which made her the right person to learn from.\n\nThe training had two sides. The hands-on side was learning to do the lab work properly: making agar, preparing samples, and running tests carefully enough that the data could be trusted. The other side was learning how to run a lab, so I could look after a team doing this work rather than just doing it myself.\n\nAlong the way, I found some of our experimental steps were out of date and didn’t meet the stricter standards we needed, so I rewrote them. I also took charge of checking every setup for quality and safety before it was used.",
           "lessons": "I learnt that in a lab, small details decide everything. A sample prepared slightly wrong can throw off weeks of work, so I got into the habit of checking things twice and writing down exactly what I did.\n\nI also learnt it’s fine to question how things have always been done. Updating the old procedures felt bold at first, but it made the whole team’s results more reliable.\n\nMost of all, this training changed how I saw leadership. Dr. Palacios showed me that running a good lab is less about knowing everything and more about setting clear standards, so everyone can do good work without needing you to stand over them.",
@@ -360,14 +372,14 @@
               "date": "2026-07-31",
               "text": "Dr. Yussi wrote me a recommendation letter. One line stuck with me: that I move “from abstract theoretical engineering concepts to hands-on experimental setups with remarkable confidence and precision.” That’s exactly the kind of engineer I want to be."
             }
-          ],
-          "logo": "monash.png"
+          ]
         },
         {
           "id": "nestle-manufacturing-malaysia-engineering-intern",
           "title": "Engineering Intern",
           "org": "Nestlé Manufacturing Malaysia",
           "when": "Dec 2025 - Feb 2026",
+          "logo": "nestle.png",
           "summary": "3 months inside a working food factory, rotating through four engineering teams, from KitKat line commissioning to wastewater upgrades.",
           "story": "For three months I worked in the engineering department at Nestlé’s Chembong factory in Negeri Sembilan. Instead of staying in one team, I rotated through four: confectionery engineering, projects, general services and maintenance, with time alongside quality assurance too. It gave me a view of how a large food plant actually runs, from the production line to the water and power keeping it going.\n\nIn the chocolate plant, I monitored production, checked equipment and recorded data at critical control points. I also ran safety inspections in areas where fine dust and heat can create explosion risks, checking machines for proper sealing, grounding and ventilation, then wrote short reports with fixes. I helped write the standard operating procedures and settings for a new KitKat line as it was being commissioned.\n\nOn the utilities side, I supported a RM 26 million wastewater treatment upgrade through membrane trials and flow estimates across three plants. Site-wide energy audits I worked on found RM 1.5 million in yearly savings, and I set water use benchmarks for the whole plant. I also proposed a microalgae system to capture 3 tonnes of CO₂ a year as part of Nestlé’s 2050 Net Zero plan, an idea I’d brought from my work at MC³.\n\nBehind the scenes, I built an Excel tool that cut audit preparation time by over 75%, checked two years of records across more than 100 parameters to get them audit-ready, and helped the maintenance team with routines, records and a framework for understanding their technicians’ skills.",
           "lessons": "The biggest lesson was how much it takes to keep a factory running. At uni we design a process once. In a plant, people are checking, maintaining and documenting it every single day, and a missing record matters as much as a broken pump.\n\nMoving between four teams taught me to pick things up fast and to listen first. Every team had its own language and priorities, and I got more done once I understood what each one actually needed from me.\n\nI also saw that small tools can make a big difference. The Excel tool I built wasn’t complicated, but it saved people hours every week. That changed how I think about engineering: sometimes the most useful thing isn’t the biggest project, it’s removing a daily headache.",
@@ -394,8 +406,7 @@
               "date": "2026-02-28",
               "text": "Last day at Nestlé. The maintenance manager wrote that I showed “strong initiative, technical curiosity, and a professional approach.” Technical curiosity is exactly what I want people to see in me, so that one meant a lot."
             }
-          ],
-          "logo": "nestle.png"
+          ]
         }
       ]
     },
@@ -407,6 +418,7 @@
           "title": "Final Year Project, with Saint-Gobain PAM",
           "org": "Monash University",
           "when": "2026",
+          "logo": "saint-gobain.png",
           "summary": "Investigating recycled plastic as backfill around buried ductile-iron pipelines, and how surrounding soil affects corrosion. Includes a review of Australian and European standards for pipeline installation.",
           "story": "When a water pipe goes into the ground, it gets buried in “backfill”, the material packed around it. Usually that’s sand or soil. But using recycled waste instead, like crushed concrete, slag, glass fines and tyre products, could save money and keep tonnes of material out of landfill.\n\nThe catch is corrosion. Different materials change the soil chemistry around a pipe, and some could eat away at it faster. Saint-Gobain PAM makes ductile iron pipes used across Australia, and my project asks a simple question: which recycled backfills are safe to use, and which aren’t?\n\nAustralia makes this harder than most places. Our pipelines run through swelling clays, salty coastal sands and acid sulfate soils, often with big swings between wet and dry. A material that’s fine in one place could be a problem in another, so the testing has to reflect real Australian ground.\n\nTo answer the question, I started by reading what’s already known about recycled backfill and Australian soils. Then I test samples in the lab, measuring things like moisture, grain size, pH, how well the soil conducts electricity, and how much salt and sulfate it holds. These all affect how quickly metal corrodes.\n\nI bury metal samples in boxes of natural, recycled and mixed backfill, then measure how fast they corrode using electrochemical tests and by weighing how much metal is lost over time. To make it realistic, I cycle the samples through wet and dry spells and temperature changes like those in Australian ground.\n\nThe goal is a practical guide: which recycled blends are low-risk, and which need extra protection like pipe wraps, coatings, sacrificial anodes or better drainage. I’m also drafting a short checklist that councils and water utilities can use when they put new pipeline work out to tender.",
           "lessons": "I’m still in the middle of this project, but a few things have already stood out.\n\nFirst, soil is far more complicated than I expected. Two samples that look the same can behave completely differently once water and salt get involved. That’s made me much more careful about not jumping to conclusions from one result.\n\nSecond, good research has to be useful to someone. The people who will use my findings, like councils, utilities and contractors, aren’t corrosion experts. Learning to explain my results in plain language has been as important as getting the results.\n\nI’ll update this once the project is finished.",
@@ -429,14 +441,14 @@
               "date": "2026-07-07",
               "text": "Started my final year project with Saint-Gobain PAM. Big question for the year: can we bury water pipes in recycled waste without them rusting away? First step is reading everything I can on Australian soils and recycled backfill."
             }
-          ],
-          "logo": "saint-gobain.png"
+          ]
         },
         {
           "id": "urop-hydrogen",
           "title": "Photoelectrochemical Hydrogen Research",
           "org": "Undergraduate Research Opportunities Program (UROP), Monash",
           "when": "Sep - Dec 2024",
+          "logo": "monash.png",
           "summary": "Made and tested materials that use sunlight to split water into hydrogen, to find out how heating them at different temperatures changes how well they work.",
           "story": "Hydrogen could be a clean fuel, but most of it is still made from fossil fuels. One cleaner idea is a photoelectrochemical cell: a device that uses sunlight and a special coated material to split water into hydrogen and oxygen.\n\nHow well that works depends a lot on the material. In my UROP project with Dr. Estee Yong, I made four different materials (CuFO, CaFO, CuCaFO and ZIS) and heated each one at four temperatures, from 400K to 700K. Heating changes a material’s structure, and we wanted to know which temperature gave the best result.\n\nI then tested every combination using three electrical methods. Together they showed how easily each material absorbs light, carries charge, and passes electrons into the water to make hydrogen. By comparing the results, I could see which conditions worked best.\n\nI also wrote a technical report focused on one material, calcium iron oxide (CaFO). I combined my results with another student’s data, which made the conclusions stronger. The sample heated at 500K came out on top, with the lowest resistance and the smoothest charge flow. My data and report were passed on to senior researchers to support their thesis work.",
           "lessons": "This was my first taste of real research, and the biggest surprise was that “hotter” or “more” isn’t always better. The best result came from the middle of the range, not the extreme. It taught me to let the data lead rather than going in with a guess.\n\nI also learnt how much careful work sits behind one clean graph. Making 16 different samples and testing each one meant keeping very good records, or the results would have been useless.\n\nWorking with another student’s data showed me that research is a team effort. Combining our results gave a clearer answer than either of us had alone.",
@@ -454,8 +466,7 @@
               "date": "2024-12-07",
               "text": "Finished my UROP project and handed in my technical report on calcium iron oxide. After testing 16 samples, the answer was 500K: not the hottest, not the coolest, but the one in between. Small lesson, big reminder to trust the data."
             }
-          ],
-          "logo": "monash.png"
+          ]
         }
       ]
     },
@@ -467,6 +478,7 @@
           "title": "Project Intern and Team Co-Leader",
           "org": "Aurora Sailing, through the Monash Warwick Alliance TeaMWork program",
           "when": "Jun - Aug 2026",
+          "logo": "aurora.png",
           "summary": "Co-led a Monash and Warwick student team developing a youth documentary concept for a Melbourne sailing charity, and brought process safety thinking to filming on the water.",
           "story": "Aurora Sailing is a youth sailing and outdoor education group based at Port Melbourne Yacht Club, run with Sea Scouts. They teach young people to sail, run multi-day trips, and are researching how time on the water affects teen mental health.\n\nThrough TeaMWork, a program run by Monash and Warwick University in the UK, I joined a mixed team of students from both universities. Our brief was to develop the concept for a youth documentary about Aurora’s work.\n\nI was a co-leader of the team. Half of us were in Melbourne and half in the UK, so a big part of my job was simply keeping us working together across time zones. I organised more than 10 meetings, kept the minutes, acted as the team’s main contact, and matched tasks to what each person was good at or wanted to learn. I also ran feedback sessions without mentors present, so people felt free to share half-formed ideas.\n\nMy most unexpected contribution came from chemical engineering. Filming young people on boats carries real risks, so I used failure mode and effects analysis (FMEA), a method engineers use to find what could go wrong in a process plant, to map the hazards of filming on the water. From that, we set clear rules for when filming continues, pauses or stops.\n\nWe finished with a three-stage plan for how the project could grow, ideas for industry partners, and a final report that I took a leading hand in writing.",
           "lessons": "The biggest surprise was how well engineering tools travel. FMEA was built for factories and chemical plants, but it worked just as well for a camera crew on a sailing boat. It made me realise the way engineers think about risk is useful almost anywhere.\n\nLeading a team split between Melbourne and the UK taught me that good communication is mostly about structure. Clear minutes, regular check-ins and one main contact point stopped things falling through the gaps when half the team was asleep.\n\nI also learnt to step back. The mentor-free feedback sessions produced some of our best ideas, just because people felt safe enough to say them.",
@@ -489,14 +501,14 @@
               "date": "2026-06-01",
               "text": "Started TeaMWork with Aurora Sailing. Half our team is in Melbourne, half in the UK and some in Malaysia, and our brief is a documentary about young people and sailing. Not exactly chemical engineering, which is exactly why I signed up."
             }
-          ],
-          "logo": "aurora.png"
+          ]
         },
         {
           "id": "brewlab",
           "title": "Marketing Team Lead",
           "org": "Monash BrewLab",
           "when": "Sep 2025 - Present",
+          "logo": "brewlab.jpeg",
           "summary": "Leading marketing for Australia’s first student-led nano-brewery, a chemical engineering team that brews beer and kombucha on campus.",
           "story": "Monash BrewLab is a student team that designs and runs a small brewery on campus. We brew beer and kombucha for competitions, which makes it one of the more fun ways to put chemical engineering into practice: fermentation, heat transfer and process control, all in one tank.\n\nI lead the six-person marketing team. Our job is to tell people what BrewLab does and bring new members in. I take each campaign from the first idea through to the final presentation, and I run regular reviews and check-ins so everyone knows what they own and can speak up when something isn’t working.\n\nOur recruitment campaigns focus on reaching students from all kinds of backgrounds, not just the people who would already sign up. So far, our work has reached around 24,000 views and brought in 72 applications.",
           "lessons": "Coming from an engineering background, marketing taught me something I didn’t expect: a good idea doesn’t matter if nobody hears about it. Explaining what we do in a way that makes someone stop scrolling is a real skill, and it’s useful well beyond marketing.\n\nLeading this team also showed me that people work best when they own something. Once each person had a clear piece of the campaign that was theirs, the quality of the work went up and I spent far less time chasing things.\n\nAnd looking at the numbers taught me to measure what matters. Views feel good, but the 72 applications are what actually grew the team.",
@@ -515,14 +527,14 @@
               "date": "2025-09-07",
               "text": "Joined Monash BrewLab as Marketing Team Lead. An engineering team that runs its own brewery felt too interesting to pass up. My first job: work out how to explain fermentation to people who just want to know if there’s free kombucha."
             }
-          ],
-          "logo": "brewlab.jpeg"
+          ]
         },
         {
           "id": "fame-peer-mentor",
           "title": "Peer Mentor",
           "org": "FaME (Friends and Mentors in Engineering), Access, Inclusion and Success, Monash",
           "when": "Feb 2026 - Present",
+          "logo": "monash.png",
           "summary": "Co-mentoring a “family” of 13 first-year engineering students through their first year at Monash.",
           "story": "Starting university is a lot, especially in engineering. FaME is a Monash program that helps first-year engineering students settle in. Students are put into small groups called “families”, and each family has two mentors who run meetups and events throughout the year.\n\nMy family has 13 first-year students from all kinds of backgrounds. My main goal is simple: make sure everyone feels welcome and nobody gets lost.\n\nAt the start, I sent out a short form asking what subjects each student was taking. That let me give advice that actually fit their situation, rather than general tips. At every meeting, I present a short slideshow on something useful, like where to find help on campus, how the engineering majors differ, and what careers they lead to.\n\nI also set up a group chat so students can ask quick questions whenever they come up, like “which unit should I pick?” or “how does special consideration work?” Sometimes the small questions are the ones that stress people out most.",
           "lessons": "Mentoring reminded me how confusing first year can be. Things that feel obvious to me now, like how majors work or where to get help, weren’t obvious at all when I started. Seeing it through their eyes made me a better explainer.\n\nI also learnt that people won’t always ask for help, even when they need it. The group chat helped because it made asking feel casual. Lowering the barrier mattered more than having all the answers.\n\nAnd I learnt that a little preparation goes a long way. Knowing each student’s subjects before we met meant my advice actually landed.",
@@ -540,14 +552,14 @@
               "date": "2026-02-07",
               "text": "Met my FaME family for the first time: 13 first-years, all a little nervous, just like I was. My goal for the year is that every one of them knows at least one person they can ask for help."
             }
-          ],
-          "logo": "monash.png"
+          ]
         },
         {
           "id": "waterwatch",
           "title": "Waterwatch Volunteer",
           "org": "Waterwatch Victoria",
           "when": "May 2026 - Present",
+          "logo": "waterwatch.png",
           "summary": "Testing the health of Dandenong and other Creek as a scientist, and helping plant native trees along its banks.",
           "story": "Waterwatch Victoria trains everyday volunteers to check the health of creeks and rivers across the state. The data we collect builds a long-term picture that helps people manage and protect these waterways.\n\nI volunteer along Dandenong Creek. On a testing day, I take samples and measure a few key things: pH (how acidic the water is), dissolved oxygen (whether fish and bugs can breathe), turbidity (how cloudy it is), and electrical conductivity (a sign of how much salt and pollution is in the water).\n\nIt sounds simple, but the results are only useful if they’re done properly. I use calibrated field equipment and follow the same sampling steps every time, so the numbers can be compared month to month and year to year. That data then goes into regional records used to look after the creek long term.\n\nI also join tree planting days, helping bring native plants back to the parkland around the creek.",
           "lessons": "Waterwatch showed me that science isn’t just something done in labs. Ordinary people collecting careful data, month after month, can tell us a lot about how a creek is changing.\n\nIt also connected to my other work in a way I didn’t expect. At MC³ I study microalgae from Port Phillip Bay, and here I’m testing the water that eventually flows into it. Seeing both ends made the bigger picture feel much more real.\n\nMost of all, it taught me patience. One reading doesn’t tell you much. The value comes from showing up again and again.",
@@ -565,14 +577,14 @@
               "date": "2026-05-07",
               "text": "First Waterwatch session on Dandenong Creek. Spent the morning measuring pH, oxygen and cloudiness by the water. A nice change from the lab, and a reminder that good data starts with doing the boring steps right."
             }
-          ],
-          "logo": "waterwatch.png"
+          ]
         },
         {
           "id": "vinnies-victoria-retail-assistant",
           "title": "Retail Assistant",
           "org": "Vinnies Victoria",
           "when": "July 2026 - Present",
+          "logo": "vinnies.jpg",
           "summary": "Working on the shop floor at Vinnies, where every sale helps fund support for people doing it tough in Victoria.",
           "story": "Vinnies shops are run by the St Vincent de Paul Society, a charity that supports people facing poverty and hardship. The money from each sale goes back into that work.\n\nOn a shift, I serve customers, help sort and price donations, and keep the shop tidy and easy to browse. Every day brings something different through the door, from someone hunting for a cheap winter coat to someone dropping off a carload of donations.",
           "lessons": "Working at Vinnies keeps me grounded. Away from labs and project meetings, it’s a reminder that a small, kind interaction can matter a lot to someone’s day.\n\nIt’s also taught me to talk with anyone. Customers come from every background and walk of life, and being patient, friendly and helpful works with all of them.",
@@ -588,8 +600,7 @@
               "date": "2026-07-07",
               "text": "First shift at Vinnies. Learnt that sorting donations is part detective work, part treasure hunt. Nice to do something every week that’s about people, not projects."
             }
-          ],
-          "logo": "vinnies.jpg"
+          ]
         }
       ]
     },
@@ -601,6 +612,7 @@
           "title": "Bachelor of Chemical Engineering (Honours)",
           "org": "Monash University, Clayton",
           "when": "Graduating 2027",
+          "logo": "monash.png",
           "summary": "Fourth-year chemical engineering, where I learn how raw materials get turned into the things people use every day, and how to do it cleaner, safer and cheaper.",
           "story": "Chemical engineering is about processes: taking something like crude oil, seawater, ore or algae and working out how to turn it into something useful at a large scale, without wasting energy or harming people and the environment.\n\nI’m in my fourth year of an Honours degree at Monash Clayton, graduating in 2027. Along the way I’ve studied the core building blocks of the field, from thermodynamics (how energy and heat behave) to separation processes (how you pull one chemical out of a mixture), reaction engineering and process design.\n\nThis year, my final year project with Saint-Gobain PAM brings that together with a real industry problem: whether recycled materials can safely surround buried water pipes.\n\nA lot of my learning has also happened outside the classroom. Student teams like MC³ and BrewLab, research through UROP, and internships at Nestlé and CSIRO have let me see the theory from lectures actually working, or sometimes not working, in the real world.",
           "lessons": "The biggest thing my degree has taught me is how I learn best. I understand things much faster when I can picture what’s physically happening first, then let the equations follow. Once I can see why something works, the maths makes sense.\n\nI’ve also learnt that the hard subjects are worth it. Units like Chemical Thermodynamics and Separation Processes were tough, but working through them properly gave me tools I keep reaching for, whether that’s in a lab, a factory or a cost model.\n\nAnd I’ve learnt that a degree is what you make of it. The lectures gave me the foundations, but the projects, teams and people around them are what made me into an engineer.",
@@ -615,15 +627,145 @@
             "Technical writing",
             "Problem solving"
           ],
-          "diary": [],
-          "logo": "monash.png"
+          "diary": []
         }
       ]
     }
   ],
   "interestsIntro": "Things I'm curious about outside my degree. Some are short notes, some are videos, all of them are things I keep thinking about.",
   "interests": [],
-  "photo": "photo.jpg"
+  "photo": "photo.jpg",
+  "portfolioIntro": "Projects I've built, tested or designed, with the tools I used and what came out of them.",
+  "portfolio": [
+    {
+      "id": "digital-equipment-documentation-system",
+      "group": "nestle-manufacturing-malaysia-engineering-intern",
+      "title": "Digital Equipment Documentation System",
+      "when": "Jan 2026 - Feb 2026",
+      "context": "Engineering and utilities, Nestlé Chembong Factory",
+      "summary": "Helped turn the factory’s equipment records into a simple Excel system with photos and automatic checks, halving the time spent processing them each week.",
+      "problem": "A factory runs on hundreds of pieces of equipment: motors, compressors, boilers and pumps across the confectionery lines and utilities. Each one needs up-to-date records for maintenance and audits.\n\nKeeping those records by hand was slow and easy to get wrong. A typo or a missing entry might not be noticed until an audit, and finding the right piece of equipment from a written description alone wasn’t always easy.",
+      "approach": "I helped build a digital documentation system in Excel covering the confectionery engineering and utility equipment.\n\nTwo features made the biggest difference. First, we added photo references for each piece of equipment, so anyone could quickly confirm they were looking at the right machine. Second, we set up automatic data validation, so the spreadsheet flagged wrong or missing entries as they were typed instead of weeks later.\n\nThe result was a system that was faster to update, easier for others to use, and more reliable when audit time came around.",
+      "results": "- Cut weekly processing time from 10 minutes to 5, halving the time spent\n- Covered motors, compressors, boilers and pumps across confectionery and utilities\n- Added photo references so equipment can be identified at a glance\n- Reduced data entry errors through automatic validation",
+      "tools": [
+        "Excel",
+        "Data validation",
+        "Database design",
+        "Equipment records",
+        "Audit readiness",
+        "Process improvement"
+      ],
+      "image": "",
+      "link": ""
+    },
+    {
+      "id": "microalgae-carbon-capture-proposal",
+      "group": "nestle-manufacturing-malaysia-engineering-intern",
+      "title": "Microalgae Carbon Capture Proposal",
+      "when": "Jan 2026",
+      "context": "Sustainability proposal, Nestlé Chembong Factory",
+      "summary": "Designed a small microalgae system to capture CO₂ from the factory and turn it into useful biomass, as an idea for Nestlé’s 2050 Net Zero plan",
+      "problem": "Nestlé has committed to reaching net zero emissions by 2050, which means every factory needs ideas for cutting or capturing its carbon.\n\nMicroalgae are tiny plants that grow fast and take in CO₂ as they grow. The question was whether a small algae system could capture some of the plant’s emissions, and whether it would make sense on cost.",
+      "approach": "Drawing on my microalgae work at MC³, I put together a technical proposal in two weeks.\n\nI used process engineering basics to size the system and estimate how much CO₂ it could take in and how much algae it would produce. I drew up a P&ID (a diagram showing the pipes, equipment and controls) so the design was clear to the engineering team, and built a cost and return-on-investment model to show whether it would be worth it.\n\nI also checked each stage of the process against Malaysia’s clean air and industrial effluent guidelines to make sure the design would comply. To make it practical, I mapped out a six-month pilot plan with clear targets for carbon captured, algae grown, and water and nutrients recycled.",
+      "results": "- Delivered a full technical proposal within 2 weeks\n- Projected 3 tonnes of CO₂ captured and 1.74 tonnes of biomass produced per year\n- Mapped a 6-month pilot plan with success targets for carbon capture, biomass yield and resource recycling\n- Brought my MC³ research into an industry setting as an idea for Nestlé’s Net Zero plan",
+      "tools": [
+        "Process design",
+        "P&ID drawing",
+        "Mass balances",
+        "Cost and ROI modelling",
+        "Excel",
+        "Microalgae cultivation",
+        "Environmental compliance",
+        "Project planning"
+      ],
+      "image": "",
+      "link": ""
+    },
+    {
+      "id": "wastewater-treatment-upgrade-and-compliance-report",
+      "group": "nestle-manufacturing-malaysia-engineering-intern",
+      "title": "Wastewater Treatment Upgrade and Compliance Reporting",
+      "when": "Dec 2025 - Feb 2026",
+      "context": "Utilities project, Nestlé Chembong Factory",
+      "summary": "Supported a RM 26 million upgrade of the factory’s wastewater treatment plant, and turned a year of water quality data into a compliance report for government regulators.",
+      "problem": "A food factory produces a lot of wastewater, full of sugars, fats and food residue. Before it can be released, it has to be treated to meet strict environmental limits set by the government.\n\nThe plant was upgrading its wastewater treatment system to handle more water and treat it more effectively. At the same time, it needed to show regulators that the water it was releasing met the required standards.",
+      "approach": "On the upgrade, I helped with membrane trials, testing how well the new biological membrane treatment would perform, and estimated the water flows coming from three plants on site. Getting the flows right matters, because the system has to be sized for the real load it will handle.\n\nOn the compliance side, I gathered and analysed 12 months of wastewater monitoring data. This covered the key measures of water quality: pH (acidity), dissolved oxygen (DO), chemical and biological oxygen demand (COD and BOD, which show how much pollution is in the water) and mixed liquor suspended solids (MLSS, a measure of the bacteria doing the treatment).\n\nI put this into a compliance report within a month and presented the findings to government and regulatory stakeholders, confirming that the plant’s discharge met environmental standards.",
+      "results": "- Supported a RM 26 million wastewater treatment upgrade that improved processing efficiency by 50%\n- Estimated wastewater flows across 3 plants to help size the new system\n- Analysed 12 months of water quality data and delivered a compliance report within a month\n- Presented findings to government and regulatory stakeholders, confirming discharge met environmental standards",
+      "tools": [
+        "Wastewater treatment",
+        "Membrane bioreactor trials",
+        "Flow estimation",
+        "Water quality analysis (pH, DO, COD, BOD, MLSS)",
+        "Excel (data analysis)",
+        "Compliance reporting",
+        "Presenting to regulators"
+      ],
+      "image": "",
+      "link": ""
+    },
+    {
+      "id": "dust-explosion-risk-analysis-atex",
+      "group": "nestle-manufacturing-malaysia-engineering-intern",
+      "title": "Dust Explosion Risk Analysis (ATEX)",
+      "when": "Dec 2025",
+      "context": "Safety project, Nestlé Chembong Factory",
+      "summary": "Mapped four processing areas where fine food dust could ignite, audited 38 electrical appliances inside them, and flagged 6 that needed replacing.",
+      "problem": "Fine powders like sugar, cocoa and flour can explode if enough dust hangs in the air and meets a spark or hot surface. In a food factory, that makes some production areas genuinely high-risk.\n\nATEX is a set of safety standards for equipment used in these kinds of explosive atmospheres. To meet it, the plant needs to know exactly where the risky zones are, and whether the electrical equipment inside them is safe to use there.",
+      "approach": "I then went onto the floor with the technicians and audited 38 electrical appliances across those four units, checking each one against the safety requirements for dusty, explosive areas. Six of them didn’t meet the standard and needed to be replaced.",
+      "results": "- Created layout schematics for 4 processing units as a baseline for risk assessment\n- Audited 38 electrical appliances in high-risk areas with floor technicians\n- Identified 6 appliances that needed replacing to meet ATEX safety requirements\n- Built a compliance log the plant can use for future audits\n- Delivered findings and a list of fixes to the compliance manager",
+      "tools": [
+        "AutoCAD",
+        "ATEX standards",
+        "Hazardous area assessment",
+        "Electrical safety audits",
+        "Excel (compliance tracking)",
+        "Risk assessment",
+        "Technical reporting"
+      ],
+      "image": "",
+      "link": ""
+    },
+    {
+      "id": "insulation-energy-savings-study",
+      "group": "nestle-manufacturing-malaysia-engineering-intern",
+      "title": "Insulation Energy Savings Study",
+      "when": "Jan 2026",
+      "context": "Energy project, Nestlé Chembong Factory",
+      "summary": "Tracked down where a food factory was losing heat through bare pipes and valves, worked out how much it was costing, and made the case for insulating them.",
+      "problem": "Steam and hot process lines run all through a food factory. Anywhere a valve or pipe surface is left uninsulated, heat escapes into the air. That lost heat has to be made up by burning more fuel to produce more steam, which costs money and adds emissions.\n\nThe plant knew some surfaces were bare, but there was no clear list of where they were or how much each one was actually costing.",
+      "approach": "I walked the key process units and mapped every uninsulated valve and hot surface I could find, building up a picture of where the thermal weak spots were.\n\nFor each one, I used the Stefan-Boltzmann law (the physics of how hot surfaces radiate heat) to calculate the net heat being lost. Adding these up turned a list of bare pipes into an actual number for energy wasted.\n\nI then compared that against the cost of insulating the surfaces, to show which upgrades would pay back and how much the plant stood to save.",
+      "results": "- Mapped the main heat loss points across key process units\n- Calculated potential savings of 50 GJ of steam and 64 GJ of fuel per year through targeted insulation\n- Projected around RM 1.5 million in yearly savings",
+      "tools": [
+        "Heat transfer calculations",
+        "Stefan-Boltzmann radiation",
+        "Thermal surveys",
+        "Excel (energy and cost modelling)",
+        "Cost and ROI analysis"
+      ],
+      "image": "",
+      "link": ""
+    },
+    {
+      "id": "plant-water-use-tracking-and-benchmarking",
+      "group": "nestle-manufacturing-malaysia-engineering-intern",
+      "title": "Plant Water Use Tracking and Benchmarking",
+      "when": "Dec 2025",
+      "context": "Utilities project, Nestlé Chembong Factory",
+      "summary": "Built a water tracking system across 10 points in a food factory, set daily usage benchmarks, and found two faulty meters that were hiding 74,000 litres of water use.",
+      "problem": "A food factory uses a lot of water, at plant entrances, in ovens and in wash-down equipment. The plant had sub-meters at each of these points, but nobody had a clear picture of what “normal” daily use looked like.\n\nThat made it hard to spot waste. Cleaning cycles cause big spikes in water use, so a meter reading that looked high might be perfectly normal, or it might be a leak or a broken meter. Without a baseline, there was no way to tell.",
+      "approach": "I built an Excel tracking database for the sub-metered water use across 10 locations in the plant, and recorded readings over several weeks.\n\nNext, I set a daily baseline for each location. The key step was separating steady-state operation from cleaning spikes, so normal production use could be compared fairly from day to day.\n\nShutdown periods kept throwing the numbers off, so I checked the weekly calculations across each shutdown cycle to make sure the data stayed accurate.\n\nOnce the baselines were in place, readings that didn’t fit the pattern stood out. That led me to two water meters that weren’t reading correctly.",
+      "results": "- Set daily water use benchmarks across 10 plant locations\n- Found and replaced 2 faulty water meters\n- Saved about 74,000 litres of water over 2 months\n- Gave the utilities team a baseline they can keep using to spot unusual water use early",
+      "tools": [
+        "Excel (data analysis, tracking database)",
+        "Water sub-metering",
+        "Baseline and benchmark setting",
+        "Data validation",
+        "Utilities monitoring"
+      ],
+      "image": "",
+      "link": ""
+    }
+  ]
 }
 </script>
 
@@ -910,6 +1052,8 @@
             })
           ]),
           h('div', { class: 'row-btns' }, [
+            moveBtn('↑ Up', idx === 0, function () { swap(list, idx, idx - 1); }),
+            moveBtn('↓ Down', idx === list.length - 1, function () { swap(list, idx, idx + 1); }),
             h('a', { class: 'open-page', href: '#/' + encodeURIComponent(it.id) }, ['Open page to write story, lessons and diary →']),
             h('button', {
               class: 'del', type: 'button',
@@ -948,6 +1092,14 @@
   function renderSection(sec) {
     if (!editMode && !sec.items.length) return null;
     var kids = [field('h2', sec, 'title', '', 'Section name')];
+    if (editMode) {
+      var si = data.sections.indexOf(sec);
+      kids.push(h('div', { class: 'section-tools' }, [
+        h('span', { text: 'Move this whole section:' }),
+        moveBtn('↑ Up', si === 0, function () { swap(data.sections, si, si - 1); }),
+        moveBtn('↓ Down', si === data.sections.length - 1, function () { swap(data.sections, si, si + 1); })
+      ]));
+    }
     sec.items.forEach(function (it, i) { kids.push(renderCard(it, sec.items, i)); });
     if (editMode) {
       kids.push(h('button', {
@@ -1217,6 +1369,32 @@
     return h('div', { class: 'chips' }, chips);
   }
 
+  // ---- Reordering ----
+  function moveBtn(label, disabled, fn) {
+    return h('button', {
+      class: 'move', type: 'button', disabled: disabled,
+      onclick: function () { fn(); dirty = true; render(); }
+    }, [label]);
+  }
+
+  function swap(arr, a, b) {
+    if (b < 0 || b >= arr.length) return;
+    var t = arr[a]; arr[a] = arr[b]; arr[b] = t;
+  }
+
+  // Projects only move within their own group.
+  function groupKey(p) { return findItem(p.group) ? p.group : ''; }
+
+  function neighbour(p, dir) {
+    var sibs = data.portfolio.filter(function (q) { return groupKey(q) === groupKey(p); });
+    return sibs[sibs.indexOf(p) + dir] || null;
+  }
+
+  function swapProjects(p, q) {
+    if (!q) return;
+    swap(data.portfolio, data.portfolio.indexOf(p), data.portfolio.indexOf(q));
+  }
+
   function projectCard(p) {
     var meta = [];
     if (tidy(p.when)) meta.push(h('span', { text: tidy(p.when) }));
@@ -1230,6 +1408,8 @@
     var thumb = projectImg(p, 'thumb');
     if (editMode) {
       body.push(h('div', { class: 'row-btns' }, [
+        moveBtn('↑ Up', !neighbour(p, -1), function () { swapProjects(p, neighbour(p, -1)); }),
+        moveBtn('↓ Down', !neighbour(p, 1), function () { swapProjects(p, neighbour(p, 1)); }),
         h('a', { class: 'open-page', href: projectHref(p) }, ['Open to edit →']),
         h('button', {
           class: 'del', type: 'button',
