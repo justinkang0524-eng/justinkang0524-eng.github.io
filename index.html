@@ -250,10 +250,72 @@
     h1, .page h1 { font-size: 1.9rem; }
     .wrap { padding-top: 40px; }
   }
+  /* Print button and A4 print layout */
+  .print-btn {
+    margin-top: 16px; padding: 9px 16px; border-radius: 8px; border: 1px solid var(--accent);
+    background: var(--card); color: var(--accent); font-weight: 600; font-size: 0.92rem;
+  }
+  .print-btn:hover { background: var(--accent-soft); }
+  #print-root { display: none; }
+  .print-box {
+    border: 1px dashed var(--line); border-radius: 10px; padding: 18px 20px; background: var(--card);
+  }
+  .pp-label-edit {
+    font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted); margin: 14px 0 4px;
+  }
+
+  @page { size: A4; margin: 16mm 15mm; }
+  @media print {
+    :root {
+      --bg: #fff; --text: #1c1c1c; --muted: #5f5f5f; --line: #dcdcd6;
+      --accent: #0f6e5c; --accent-soft: #e3f1ed; --card: #fff;
+    }
+    body { background: #fff; font-size: 10.5pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body.printing #app { display: none; }
+    body.printing #print-root { display: block; }
+    .pp-header {
+      display: flex; justify-content: space-between; align-items: flex-end; gap: 12mm;
+      border-bottom: 2px solid var(--accent); padding-bottom: 4mm; margin-bottom: 5mm;
+    }
+    .pp-name { font-size: 20pt; font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; }
+    .pp-tagline { color: var(--muted); font-size: 10.5pt; }
+    .pp-contact { font-size: 9pt; color: var(--muted); margin-top: 1.5mm; }
+    .pp-doc-title { font-size: 11pt; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; white-space: nowrap; }
+    .pp-intro { color: var(--muted); margin-bottom: 4mm; }
+    .pp-group { margin-top: 6mm; }
+    .pp-group-head {
+      display: flex; align-items: center; gap: 4mm; padding-bottom: 2.5mm; margin-bottom: 3mm;
+      border-bottom: 1px solid var(--line); break-after: avoid; page-break-after: avoid;
+    }
+    .pp-group-head .logo { width: 12mm; height: 12mm; border-radius: 2.5mm; padding: 1mm; font-size: 12pt; }
+    .pp-group-name { font-weight: 700; font-size: 12.5pt; }
+    .pp-meta { color: var(--muted); font-size: 9pt; }
+    .pp-project { padding: 3mm 0 4mm; border-bottom: 1px dashed var(--line); }
+    .pp-project:last-child { border-bottom: none; }
+    .pp-head { break-inside: avoid; page-break-inside: avoid; break-after: avoid; page-break-after: avoid; }
+    .pp-project h3 { font-size: 11.5pt; font-weight: 700; }
+    .pp-num { color: var(--accent); margin-right: 2mm; }
+    .pp-project { break-inside: avoid; page-break-inside: avoid; padding: 2.5mm 0 3mm; }
+    .pp-title-row { display: flex; justify-content: space-between; align-items: baseline; gap: 6mm; margin-bottom: 1.5mm; }
+    .pp-title-row .pp-meta { white-space: nowrap; }
+    .pp-row { display: grid; grid-template-columns: 30mm 1fr; gap: 4mm; margin-top: 1.2mm; }
+    .pp-row .pp-label { margin: 0.6mm 0 0; }
+    .pp-row .pp-text { white-space: pre-line; }
+    .pp-summary { margin-top: 1mm; font-style: italic; }
+    .pp-image { display: block; max-width: 100%; max-height: 60mm; margin: 3mm 0; border-radius: 2mm; border: 1px solid var(--line); break-inside: avoid; }
+    .pp-block { margin-top: 2.5mm; break-inside: avoid; page-break-inside: avoid; }
+    .pp-label { font-size: 8pt; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5mm; }
+    .pp-text { white-space: pre-line; }
+    .pp-tools { display: flex; flex-wrap: wrap; gap: 1.5mm; }
+    .pp-tool { background: var(--accent-soft); color: var(--accent); padding: 0.5mm 2.5mm; border-radius: 3mm; font-size: 8.5pt; font-weight: 600; }
+    .pp-link { margin-top: 2mm; font-size: 9pt; color: var(--muted); word-break: break-all; }
+  }
 </style>
 </head>
 <body>
 <div id="app"></div>
+<div id="print-root" aria-hidden="true"></div>
 <noscript><p style="padding:20px">Please turn on JavaScript to view this site.</p></noscript>
 
 <script id="site-data" type="application/json">
@@ -651,7 +713,10 @@
         "Process improvement"
       ],
       "image": "",
-      "link": ""
+      "link": "",
+      "briefIssue": "Equipment records for motors, compressors, boilers and pumps were kept by hand, which was slow and easy to get wrong.",
+      "briefSolution": "Helped build an Excel documentation system with photo references and automatic data checks.",
+      "briefResults": "- Cut weekly processing time from 10 to 5 minutes\n- Fewer data entry errors through automatic validation"
     },
     {
       "id": "microalgae-carbon-capture-proposal",
@@ -674,7 +739,10 @@
         "Project planning"
       ],
       "image": "",
-      "link": ""
+      "link": "",
+      "briefIssue": "Nestlé needs practical ways to cut factory emissions to reach its 2050 Net Zero goal.",
+      "briefSolution": "Designed a microalgae CO₂ capture system, with a P&ID, a cost and ROI model, and a 6-month pilot plan.",
+      "briefResults": "- Projected 3 tonnes of CO₂ captured and 1.74 tonnes of biomass per year\n- Full technical proposal delivered in 2 weeks"
     },
     {
       "id": "wastewater-treatment-upgrade-and-compliance-report",
@@ -696,7 +764,10 @@
         "Presenting to regulators"
       ],
       "image": "",
-      "link": ""
+      "link": "",
+      "briefIssue": "The plant was upgrading its wastewater treatment system and needed to prove to regulators that its discharge met limits.",
+      "briefSolution": "Ran membrane trials and flow estimates for the upgrade, and turned 12 months of water quality data into a compliance report.",
+      "briefResults": "- Supported a RM 26 million upgrade that improved processing efficiency by 50%\n- Compliance report delivered within a month and presented to regulators"
     },
     {
       "id": "dust-explosion-risk-analysis-atex",
@@ -718,7 +789,10 @@
         "Technical reporting"
       ],
       "image": "",
-      "link": ""
+      "link": "",
+      "briefIssue": "Fine food dust can explode, so equipment in dusty areas must meet ATEX safety standards.",
+      "briefSolution": "Mapped 4 processing units in AutoCAD and audited the electrical appliances inside them with floor technicians.",
+      "briefResults": "- Audited 38 electrical appliances\n- Identified 6 that needed replacing to meet ATEX requirements"
     },
     {
       "id": "insulation-energy-savings-study",
@@ -738,7 +812,10 @@
         "Cost and ROI analysis"
       ],
       "image": "",
-      "link": ""
+      "link": "",
+      "briefIssue": "Uninsulated valves and hot surfaces were leaking heat, wasting steam and fuel.",
+      "briefSolution": "Mapped the bare surfaces and calculated heat losses using Stefan-Boltzmann radiation equations.",
+      "briefResults": "- Potential savings of 50 GJ of steam and 64 GJ of fuel per year\n- Projected around RM 1.5 million in yearly savings"
     },
     {
       "id": "plant-water-use-tracking-and-benchmarking",
@@ -758,7 +835,10 @@
         "Utilities monitoring"
       ],
       "image": "",
-      "link": ""
+      "link": "",
+      "briefIssue": "Without a daily baseline, there was no way to tell normal water use from leaks or faulty meters.",
+      "briefSolution": "Built an Excel tracker across 10 locations and set daily baselines that separate cleaning spikes from normal use.",
+      "briefResults": "- Found and replaced 2 faulty water meters\n- Saved about 74,000 litres of water over 2 months"
     }
   ]
 }
@@ -873,7 +953,7 @@
     d.portfolio = d.portfolio || [];
     var usedProjects = {};
     d.portfolio.forEach(function (p) {
-      ['group', 'title', 'when', 'context', 'summary', 'problem', 'approach', 'results', 'image', 'link'].forEach(function (k) { p[k] = p[k] || ''; });
+      ['group', 'title', 'when', 'context', 'summary', 'problem', 'approach', 'results', 'image', 'link', 'briefIssue', 'briefSolution', 'briefResults'].forEach(function (k) { p[k] = p[k] || ''; });
       p.tools = repairSkills(p.tools || []);
       var id = p.id || slugify(p.title) || 'project';
       var base = id, n = 2;
@@ -1424,6 +1504,9 @@
     var intro = field('p', data, 'portfolioIntro', 'prose', 'A line or two about this page', true);
     var sec = [h('h2', { text: 'Project portfolio' })];
     if (intro) sec.push(intro);
+    if (data.portfolio.some(function (p) { return tidy(p.title); })) {
+      sec.push(h('button', { class: 'print-btn', type: 'button', onclick: printPortfolio }, ['Print or save as PDF (A4)']));
+    }
     kids.push(h('section', null, sec));
 
     var list = [];
@@ -1566,6 +1649,20 @@
     var results = block('Results', field('p', p, 'results', 'prose', 'What came out of it? Numbers, findings, a working design, a grade, feedback...', true));
     [problem, approach, tools, results].forEach(function (n) { if (n) kids.push(n); });
 
+    // Short version used only in the printed A4 portfolio.
+    if (editMode) {
+      kids.push(h('section', { class: 'print-box' }, [
+        h('h2', { text: 'Short version for the printed portfolio' }),
+        h('p', { class: 'hint', style: 'margin:0 0 14px', text: 'Keep each to one or two lines. If left blank, the printout uses the first sentence of the full text.' }),
+        h('div', { class: 'pp-label-edit', text: 'The issue' }),
+        field('p', p, 'briefIssue', 'prose', 'One line: what was the problem?', true),
+        h('div', { class: 'pp-label-edit', text: 'How I solved it' }),
+        field('p', p, 'briefSolution', 'prose', 'One line: what did you do?', true),
+        h('div', { class: 'pp-label-edit', text: 'Results' }),
+        field('p', p, 'briefResults', 'prose', 'Two or three short lines, each starting with "- "', true)
+      ]));
+    }
+
     var link = safeUrl(p.link);
     if (!editMode && link) {
       kids.push(h('p', { style: 'margin-top:28px' }, [h('a', { class: 'link-btn', href: link, target: '_blank', rel: 'noopener' }, ['View the full project →'])]));
@@ -1590,6 +1687,100 @@
     kids.push(h('div', { class: 'page-nav' }, nav));
 
     return [h('div', { class: 'page' }, kids)];
+  }
+
+  /* ---------- printable A4 portfolio ---------- */
+
+  function printBlock(label, text) {
+    if (!tidy(text)) return null;
+    return h('div', { class: 'pp-block' }, [h('div', { class: 'pp-label', text: label }), h('p', { class: 'pp-text', text: text })]);
+  }
+
+  // First sentence of a longer text, used when no short version has been written.
+  function firstSentence(s) {
+    s = tidy(s).split(/\n\s*\n/)[0].replace(/\s+/g, ' ');
+    var m = s.match(/^.+?[.!?](?=\s|$)/);
+    return m ? m[0] : s;
+  }
+
+  function firstLines(s, n) {
+    return tidy(s).split('\n').map(function (l) { return l.trim(); }).filter(Boolean).slice(0, n).join('\n');
+  }
+
+  function printRow(label, text) {
+    if (!tidy(text)) return null;
+    return h('div', { class: 'pp-row' }, [h('div', { class: 'pp-label', text: label }), h('div', { class: 'pp-text', text: tidy(text) })]);
+  }
+
+  function printProject(p, num) {
+    var issue = tidy(p.briefIssue) || firstSentence(p.problem);
+    var solution = tidy(p.briefSolution) || firstSentence(p.approach);
+    var results = tidy(p.briefResults) || firstLines(p.results, 3);
+    return h('article', { class: 'pp-project' }, [
+      h('div', { class: 'pp-title-row' }, [
+        h('h3', null, [h('span', { class: 'pp-num', text: num + '.' }), tidy(p.title)]),
+        tidy(p.when) ? h('span', { class: 'pp-meta', text: tidy(p.when) }) : null
+      ]),
+      printRow('Issue', issue),
+      printRow('How I solved it', solution),
+      printRow('Results', results)
+    ]);
+  }
+
+  function printGroup(it, projects) {
+    var head = it
+      ? h('div', { class: 'pp-group-head' }, [
+          logoEl(it, ''),
+          h('div', null, [
+            h('div', { class: 'pp-group-name', text: tidy(it.org) || tidy(it.title) }),
+            h('div', { class: 'pp-meta', text: [tidy(it.title), tidy(it.when)].filter(Boolean).join(' · ') })
+          ])
+        ])
+      : h('div', { class: 'pp-group-head' }, [h('div', { class: 'pp-group-name', text: 'Other projects' })]);
+    return h('section', { class: 'pp-group' }, [head].concat(projects.map(function (p, i) { return printProject(p, i + 1); })));
+  }
+
+  function buildPrint() {
+    var projects = data.portfolio.filter(function (p) { return tidy(p.title); });
+    var contact = [];
+    if (tidy(data.email)) contact.push(tidy(data.email));
+    if (safeUrl(data.linkedin)) contact.push(safeUrl(data.linkedin).replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''));
+    contact.push(location.host + location.pathname.replace(/index\.html$/, ''));
+
+    var kids = [h('header', { class: 'pp-header' }, [
+      h('div', null, [
+        h('div', { class: 'pp-name', text: tidy(data.name) }),
+        tidy(data.tagline) ? h('div', { class: 'pp-tagline', text: tidy(data.tagline) }) : null,
+        h('div', { class: 'pp-contact', text: contact.join('  ·  ') })
+      ]),
+      h('div', { class: 'pp-doc-title', text: 'Project Portfolio' })
+    ])];
+    if (tidy(data.portfolioIntro)) kids.push(h('p', { class: 'pp-intro', text: tidy(data.portfolioIntro) }));
+
+    allItems().forEach(function (it) {
+      var g = projects.filter(function (p) { return p.group === it.id; });
+      if (g.length) kids.push(printGroup(it, g));
+    });
+    var others = projects.filter(function (p) { return !findItem(p.group); });
+    if (others.length) kids.push(printGroup(null, others));
+
+    document.getElementById('print-root').replaceChildren.apply(document.getElementById('print-root'), kids);
+  }
+
+  function printPortfolio() {
+    buildPrint();
+    document.body.classList.add('printing');
+    var done = function () { document.body.classList.remove('printing'); window.removeEventListener('afterprint', done); };
+    window.addEventListener('afterprint', done);
+    // Give images a moment to load before the print dialog opens.
+    var imgs = Array.prototype.slice.call(document.querySelectorAll('#print-root img'));
+    var pending = imgs.filter(function (i) { return !i.complete; });
+    var go = function () { setTimeout(function () { window.print(); }, 50); };
+    if (!pending.length) return go();
+    var left = pending.length, fired = false;
+    var once = function () { if (!fired && --left <= 0) { fired = true; go(); } };
+    pending.forEach(function (i) { i.addEventListener('load', once); i.addEventListener('error', once); });
+    setTimeout(function () { if (!fired) { fired = true; go(); } }, 2500);
   }
 
   /* ---------- edit bar ---------- */
@@ -1709,6 +1900,7 @@
       var out = {
         id: p.id, group: idMap[p.group] || '', title: tidy(p.title), when: tidy(p.when), context: tidy(p.context), summary: tidy(p.summary),
         problem: tidy(p.problem), approach: tidy(p.approach), results: tidy(p.results),
+        briefIssue: tidy(p.briefIssue), briefSolution: tidy(p.briefSolution), briefResults: tidy(p.briefResults),
         tools: (p.tools || []).map(tidy).filter(Boolean), image: tidy(p.image), link: tidy(p.link)
       };
       if (/^project-/.test(out.id) && out.title) out.id = slugify(out.title);
