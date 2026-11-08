@@ -93,6 +93,22 @@
   .when { color: var(--muted); font-size: 0.9rem; }
   .org { color: var(--muted); font-size: 0.95rem; }
   .summary { margin-top: 8px; font-size: 0.96rem; }
+  .card-row { display: flex; gap: 16px; align-items: flex-start; }
+  .card-body { flex: 1; min-width: 0; }
+  .logo {
+    width: 48px; height: 48px; flex-shrink: 0; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; object-fit: contain; padding: 4px;
+  }
+  .logo.large { width: 72px; height: 72px; border-radius: 14px; padding: 6px; margin-bottom: 18px; }
+  .monogram {
+    display: flex; align-items: center; justify-content: center; padding: 0;
+    background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 1.2rem;
+  }
+  .monogram.large { font-size: 1.8rem; }
+  @media (max-width: 520px) {
+    .card-row { gap: 12px; }
+    .logo { width: 40px; height: 40px; }
+  }
   .more { display: inline-block; margin-top: 10px; color: var(--accent); font-size: 0.9rem; font-weight: 500; }
   .see-all { display: inline-block; margin-top: 4px; font-weight: 500; font-size: 0.92rem; text-decoration: none; }
   .see-all:hover { text-decoration: underline; }
@@ -224,7 +240,8 @@
               "date": "2026-09-01",
               "text": "Got the news that I’d been offered a vacation studentship at CSIRO. To prepare for the interview, I put together my own comparison of the main ways antimony gets processed, just to understand the options before walking in. Now that I’ve got the role, I’m keen to see how close my early thinking was to how the experts actually approach it."
             }
-          ]
+          ],
+          "logo": "csiro.jpg"
         },
         {
           "id": "mc3-biotech-manager",
@@ -248,7 +265,8 @@
               "date": "2026-10-12",
               "text": "Stepped up from leading the microalgae growing team to Biotech Manager. I now look after three subteams instead of one, which means learning how photobioreactors and biochar work in enough depth to support the people working on them. First job: setting goals for each subteam for next semester."
             }
-          ]
+          ],
+          "logo": "mc3.png"
         },
         {
           "id": "mc3-team-lead",
@@ -278,7 +296,8 @@
               "date": "2025-11-01",
               "text": "Joined MC³ as a microalgae growing engineer. First challenge: working out how to get living samples from Port Phillip Bay back to the lab in one piece."
             }
-          ]
+          ],
+          "logo": "mc3.png"
         },
         {
           "id": "monash-lab-trainee",
@@ -303,7 +322,8 @@
               "date": "2026-07-31",
               "text": "Dr. Yussi wrote me a recommendation letter. One line stuck with me: that I move “from abstract theoretical engineering concepts to hands-on experimental setups with remarkable confidence and precision.” That’s exactly the kind of engineer I want to be."
             }
-          ]
+          ],
+          "logo": "monash.png"
         },
         {
           "id": "nestle-manufacturing-malaysia-engineering-intern",
@@ -336,7 +356,8 @@
               "date": "2026-02-28",
               "text": "Last day at Nestlé. The maintenance manager wrote that I showed “strong initiative, technical curiosity, and a professional approach.” Technical curiosity is exactly what I want people to see in me, so that one meant a lot."
             }
-          ]
+          ],
+          "logo": "nestle.png"
         }
       ]
     },
@@ -370,7 +391,8 @@
               "date": "2026-07-07",
               "text": "Started my final year project with Saint-Gobain PAM. Big question for the year: can we bury water pipes in recycled waste without them rusting away? First step is reading everything I can on Australian soils and recycled backfill."
             }
-          ]
+          ],
+          "logo": "saint-gobain.png"
         },
         {
           "id": "urop-hydrogen",
@@ -394,7 +416,8 @@
               "date": "2024-12-07",
               "text": "Finished my UROP project and handed in my technical report on calcium iron oxide. After testing 16 samples, the answer was 500K: not the hottest, not the coolest, but the one in between. Small lesson, big reminder to trust the data."
             }
-          ]
+          ],
+          "logo": "monash.png"
         }
       ]
     },
@@ -428,7 +451,8 @@
               "date": "2026-06-01",
               "text": "Started TeaMWork with Aurora Sailing. Half our team is in Melbourne, half in the UK and some in Malaysia, and our brief is a documentary about young people and sailing. Not exactly chemical engineering, which is exactly why I signed up."
             }
-          ]
+          ],
+          "logo": "aurora.png"
         },
         {
           "id": "brewlab",
@@ -453,7 +477,8 @@
               "date": "2025-09-07",
               "text": "Joined Monash BrewLab as Marketing Team Lead. An engineering team that runs its own brewery felt too interesting to pass up. My first job: work out how to explain fermentation to people who just want to know if there’s free kombucha."
             }
-          ]
+          ],
+          "logo": "brewlab.jpeg"
         },
         {
           "id": "fame-peer-mentor",
@@ -477,7 +502,8 @@
               "date": "2026-02-07",
               "text": "Met my FaME family for the first time: 13 first-years, all a little nervous, just like I was. My goal for the year is that every one of them knows at least one person they can ask for help."
             }
-          ]
+          ],
+          "logo": "monash.png"
         },
         {
           "id": "waterwatch",
@@ -501,7 +527,8 @@
               "date": "2026-05-07",
               "text": "First Waterwatch session on Dandenong Creek. Spent the morning measuring pH, oxygen and cloudiness by the water. A nice change from the lab, and a reminder that good data starts with doing the boring steps right."
             }
-          ]
+          ],
+          "logo": "waterwatch.png"
         },
         {
           "id": "vinnies-victoria-retail-assistant",
@@ -523,7 +550,8 @@
               "date": "2026-07-07",
               "text": "First shift at Vinnies. Learnt that sorting donations is part detective work, part treasure hunt. Nice to do something every week that’s about people, not projects."
             }
-          ]
+          ],
+          "logo": "vinnies.jpg"
         }
       ]
     },
@@ -549,7 +577,8 @@
             "Technical writing",
             "Problem solving"
           ],
-          "diary": []
+          "diary": [],
+          "logo": "monash.png"
         }
       ]
     }
@@ -643,7 +672,7 @@
       s.items.forEach(function (it) {
         it.skills = repairSkills(it.skills || []);
         it.diary = it.diary || [];
-        ['title', 'org', 'when', 'summary', 'story', 'lessons'].forEach(function (k) { it[k] = it[k] || ''; });
+        ['title', 'org', 'when', 'summary', 'story', 'lessons', 'logo'].forEach(function (k) { it[k] = it[k] || ''; });
         var id = it.id || slugify(it.org ? it.org + ' ' + it.title : it.title);
         if (id === 'interests') id = 'interests-entry';
         var base = id, n = 2;
@@ -819,22 +848,49 @@
     ];
 
     if (editMode) {
-      return h('div', { class: 'item' }, head.concat([
-        h('div', { class: 'row-btns' }, [
-          h('a', { class: 'open-page', href: '#/' + encodeURIComponent(it.id) }, ['Open page to write story, lessons and diary →']),
-          h('button', {
-            class: 'del', type: 'button',
-            onclick: function () {
-              if (confirm('Delete this entry and its page?')) { list.splice(idx, 1); dirty = true; render(); }
-            }
-          }, ['Delete'])
-        ])
-      ]));
+      var slot = h('div', { class: 'logo-slot' }, [logoEl(it, '')]);
+      return h('div', { class: 'item' }, [h('div', { class: 'card-row' }, [
+        slot,
+        h('div', { class: 'card-body' }, head.concat([
+          h('div', { class: 'inputs' }, [
+            input('Logo file name (optional)', it, 'logo', 'e.g. csiro.png (upload it to GitHub first)', function () {
+              slot.replaceChildren(logoEl(it, ''));
+            })
+          ]),
+          h('div', { class: 'row-btns' }, [
+            h('a', { class: 'open-page', href: '#/' + encodeURIComponent(it.id) }, ['Open page to write story, lessons and diary →']),
+            h('button', {
+              class: 'del', type: 'button',
+              onclick: function () {
+                if (confirm('Delete this entry and its page?')) { list.splice(idx, 1); dirty = true; render(); }
+              }
+            }, ['Delete'])
+          ])
+        ]))
+      ])]);
     }
 
-    return h('a', { class: 'item', href: '#/' + encodeURIComponent(it.id) }, head.concat([
-      h('span', { class: 'more', text: 'View →' })
-    ]));
+    return h('a', { class: 'item', href: '#/' + encodeURIComponent(it.id) }, [h('div', { class: 'card-row' }, [
+      logoEl(it, ''),
+      h('div', { class: 'card-body' }, head.concat([h('span', { class: 'more', text: 'View →' })]))
+    ])]);
+  }
+
+  // The organisation's logo, or its first letter in a circle if there's no logo yet.
+  function monogram(it, size) {
+    var src = tidy(it.org) || tidy(it.title);
+    var m = src.match(/[A-Za-z0-9]/);
+    return h('div', { class: 'logo monogram ' + size, 'aria-hidden': 'true', text: m ? m[0].toUpperCase() : '•' });
+  }
+
+  function logoEl(it, size) {
+    var src = safeUrl(it.logo);
+    if (!src) return monogram(it, size);
+    var img = h('img', {
+      class: 'logo ' + size, src: src, alt: (tidy(it.org) || tidy(it.title)) + ' logo',
+      onerror: function () { if (img.parentNode) img.parentNode.replaceChild(monogram(it, size), img); }
+    });
+    return img;
   }
 
   function renderSection(sec) {
@@ -943,6 +999,7 @@
 
     var kids = [
       h('a', { class: 'back', href: '#/' }, ['← Back to all experience']),
+      logoEl(it, 'large'),
       field('h1', it, 'title', '', 'Role or project'),
       field('div', it, 'org', 'page-org', 'Organisation'),
       field('div', it, 'when', 'page-when', 'Dates'),
@@ -1156,7 +1213,7 @@
       s.items = s.items.map(function (it) {
         var out = {
           id: it.id,
-          title: tidy(it.title), org: tidy(it.org), when: tidy(it.when),
+          title: tidy(it.title), org: tidy(it.org), when: tidy(it.when), logo: tidy(it.logo),
           summary: tidy(it.summary), story: tidy(it.story), lessons: tidy(it.lessons),
           skills: (it.skills || []).map(tidy).filter(Boolean),
           diary: (it.diary || []).map(function (e) { return { date: e.date || '', text: tidy(e.text) }; })
