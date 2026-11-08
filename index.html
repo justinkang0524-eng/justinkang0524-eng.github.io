@@ -93,6 +93,36 @@
   .when { color: var(--muted); font-size: 0.9rem; }
   .org { color: var(--muted); font-size: 0.95rem; }
   .summary { margin-top: 8px; font-size: 0.96rem; }
+  .group { margin-top: 36px; }
+  .group-head {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 14px;
+    text-decoration: none; color: inherit;
+  }
+  a.group-head:hover .group-name { color: var(--accent); }
+  .group-name { font-weight: 700; font-size: 1.1rem; }
+  .group-sub { color: var(--muted); font-size: 0.9rem; }
+  .small-add { padding: 9px; font-size: 0.9rem; }
+  .owner-link { display: inline-block; text-decoration: none; }
+  .owner-link:hover { text-decoration: underline; }
+  .select {
+    font: inherit; font-size: 0.95rem; color: var(--text); background: var(--card);
+    border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; width: 100%;
+  }
+  .thumb {
+    width: 120px; height: 84px; flex-shrink: 0; border-radius: 8px; object-fit: cover;
+    border: 1px solid var(--line); background: var(--card);
+  }
+  .project-image {
+    display: block; width: 100%; max-height: 420px; object-fit: contain; margin-top: 24px;
+    border-radius: 10px; border: 1px solid var(--line); background: var(--card);
+  }
+  .more-chip { background: none; border: 1px solid var(--line); color: var(--muted); }
+  .link-btn {
+    display: inline-block; padding: 10px 18px; border-radius: 8px; border: 1px solid var(--accent);
+    text-decoration: none; font-weight: 600; font-size: 0.95rem;
+  }
+  .link-btn:hover { background: var(--accent-soft); }
+  @media (max-width: 520px) { .thumb { width: 84px; height: 64px; } }
   .card-row { display: flex; gap: 16px; align-items: flex-start; }
   .card-body { flex: 1; min-width: 0; }
   .logo {
@@ -608,6 +638,7 @@
   var app = document.getElementById('app');
 
   var DEFAULT_INTRO = "Things I'm curious about outside my degree. Some are short notes, some are videos, all of them are things I keep thinking about.";
+  var DEFAULT_PORTFOLIO_INTRO = "Projects I've built, tested or designed, with the tools I used and what came out of them.";
 
   /* ---------- helpers ---------- */
 
@@ -682,7 +713,7 @@
         it.diary = it.diary || [];
         ['title', 'org', 'when', 'summary', 'story', 'lessons', 'logo'].forEach(function (k) { it[k] = it[k] || ''; });
         var id = it.id || slugify(it.org ? it.org + ' ' + it.title : it.title);
-        if (id === 'interests') id = 'interests-entry';
+        if (id === 'interests' || id === 'portfolio') id = id + '-entry';
         var base = id, n = 2;
         while (used[id]) id = base + '-' + (n++);
         used[id] = true;
@@ -699,6 +730,18 @@
       var base = id, n = 2;
       while (usedPosts[id]) id = base + '-' + (n++);
       usedPosts[id] = true;
+      p.id = id;
+    });
+    if (typeof d.portfolioIntro !== 'string') d.portfolioIntro = DEFAULT_PORTFOLIO_INTRO;
+    d.portfolio = d.portfolio || [];
+    var usedProjects = {};
+    d.portfolio.forEach(function (p) {
+      ['group', 'title', 'when', 'context', 'summary', 'problem', 'approach', 'results', 'image', 'link'].forEach(function (k) { p[k] = p[k] || ''; });
+      p.tools = repairSkills(p.tools || []);
+      var id = p.id || slugify(p.title) || 'project';
+      var base = id, n = 2;
+      while (usedProjects[id]) id = base + '-' + (n++);
+      usedProjects[id] = true;
       p.id = id;
     });
     return d;
@@ -838,6 +881,7 @@
     }
     var nav = h('nav', { class: 'nav', 'aria-label': 'Sections' }, [
       h('a', { href: '#/', class: active === 'experience' ? 'active' : null }, ['Experience']),
+      h('a', { href: '#/portfolio', class: active === 'portfolio' ? 'active' : null }, ['Portfolio']),
       h('a', { href: '#/interests', class: active === 'interests' ? 'active' : null }, ['Interests'])
     ]);
     return [h('header', null, header), nav];
@@ -1023,7 +1067,7 @@
     var skills = block('Skills I built', skillsField(it));
     var diary = renderDiary(it);
 
-    [doing, learnt, skills, diary].forEach(function (n) { if (n) kids.push(n); });
+    [doing, learnt, skills, diary, projectsFor(it)].forEach(function (n) { if (n) kids.push(n); });
     if (!editMode && !doing && !learnt && !skills && !diary) {
       kids.push(h('p', { class: 'empty', text: 'More about this one coming soon.' }));
     }
@@ -1147,6 +1191,232 @@
     return [h('div', { class: 'page' }, kids)];
   }
 
+  /* ---------- portfolio ---------- */
+
+  function findProject(id) {
+    for (var i = 0; i < data.portfolio.length; i++) if (data.portfolio[i].id === id) return data.portfolio[i];
+    return null;
+  }
+
+  function projectHref(p) { return '#/portfolio/' + encodeURIComponent(p.id); }
+
+  function projectImg(p, cls) {
+    var src = safeUrl(p.image);
+    if (!src) return null;
+    return h('img', {
+      class: cls, src: src, alt: tidy(p.title) || 'Project image', loading: 'lazy',
+      onerror: function () { this.style.display = 'none'; }
+    });
+  }
+
+  function toolChips(tools, limit) {
+    if (!tools || !tools.length) return null;
+    var shown = limit ? tools.slice(0, limit) : tools;
+    var chips = shown.map(function (t) { return h('span', { class: 'chip', text: t }); });
+    if (limit && tools.length > limit) chips.push(h('span', { class: 'chip more-chip', text: '+' + (tools.length - limit) }));
+    return h('div', { class: 'chips' }, chips);
+  }
+
+  function projectCard(p) {
+    var meta = [];
+    if (tidy(p.when)) meta.push(h('span', { text: tidy(p.when) }));
+    if (tidy(p.context)) meta.push(h('span', { text: tidy(p.context) }));
+    var body = [
+      h('h3', { text: tidy(p.title) || 'Untitled project' }),
+      meta.length ? h('div', { class: 'card-meta' }, [meta[0], meta[1] ? h('span', { text: '·' }) : null, meta[1]]) : null,
+      tidy(p.summary) ? h('p', { class: 'summary', text: p.summary }) : null,
+      p.tools.length ? h('div', { style: 'margin-top:10px' }, [toolChips(p.tools, 5)]) : null
+    ];
+    var thumb = projectImg(p, 'thumb');
+    if (editMode) {
+      body.push(h('div', { class: 'row-btns' }, [
+        h('a', { class: 'open-page', href: projectHref(p) }, ['Open to edit →']),
+        h('button', {
+          class: 'del', type: 'button',
+          onclick: function () {
+            if (confirm('Delete this project?')) { data.portfolio.splice(data.portfolio.indexOf(p), 1); dirty = true; render(); }
+          }
+        }, ['Delete'])
+      ]));
+      return h('div', { class: 'item' }, [h('div', { class: 'card-row' }, [thumb, h('div', { class: 'card-body' }, body)])]);
+    }
+    body.push(h('span', { class: 'more', text: 'See project →' }));
+    return h('a', { class: 'item', href: projectHref(p) }, [h('div', { class: 'card-row' }, [thumb, h('div', { class: 'card-body' }, body)])]);
+  }
+
+  function renderPortfolio() {
+    var kids = renderTop('portfolio');
+    var intro = field('p', data, 'portfolioIntro', 'prose', 'A line or two about this page', true);
+    var sec = [h('h2', { text: 'Project portfolio' })];
+    if (intro) sec.push(intro);
+    kids.push(h('section', null, sec));
+
+    var list = [];
+    if (editMode) {
+      list.push(h('button', {
+        class: 'add', type: 'button', style: 'margin-bottom:18px',
+        onclick: function () { newProject(''); }
+      }, ['+ New project']));
+    }
+    var projects = data.portfolio.filter(function (p) { return editMode || tidy(p.title) || tidy(p.summary); });
+    if (!projects.length && !editMode) list.push(h('p', { class: 'empty', text: 'Projects coming soon.' }));
+    kids.push(h('section', { style: 'margin-top:28px' }, list));
+
+    // One group per experience, in the same order as the Experience tab, then "Other projects".
+    allItems().forEach(function (it) {
+      var inGroup = projects.filter(function (p) { return p.group === it.id; });
+      if (inGroup.length) kids.push(renderGroup(it, inGroup));
+    });
+    var others = projects.filter(function (p) { return !findItem(p.group); });
+    if (others.length) kids.push(renderGroup(null, others));
+    return kids;
+  }
+
+  function renderGroup(it, projects) {
+    var head;
+    if (it) {
+      var sub = [tidy(it.title), tidy(it.when)].filter(Boolean).join(' · ');
+      head = h('a', { class: 'group-head', href: '#/' + encodeURIComponent(it.id) }, [
+        logoEl(it, ''),
+        h('div', null, [
+          h('div', { class: 'group-name', text: tidy(it.org) || tidy(it.title) }),
+          sub ? h('div', { class: 'group-sub', text: sub }) : null
+        ])
+      ]);
+    } else {
+      head = h('div', { class: 'group-head' }, [h('div', { class: 'group-name', text: 'Other projects' })]);
+    }
+    var kids = [head];
+    projects.forEach(function (p) { kids.push(projectCard(p)); });
+    if (editMode) {
+      kids.push(h('button', {
+        class: 'add small-add', type: 'button',
+        onclick: function () { newProject(it ? it.id : ''); }
+      }, ['+ Add a project to ' + (it ? (tidy(it.org) || tidy(it.title)) : 'Other projects')]));
+    }
+    return h('section', { class: 'group' }, kids);
+  }
+
+  function newProject(groupId) {
+    var p = {
+      id: 'project-' + Date.now().toString(36), group: groupId || '', title: '', when: '', context: '', summary: '',
+      problem: '', approach: '', results: '', tools: [], image: '', link: ''
+    };
+    data.portfolio.unshift(p);
+    dirty = true;
+    location.hash = projectHref(p);
+  }
+
+  function groupPicker(p) {
+    var opts = [h('option', { value: '', text: 'Other projects (not linked to an experience)' })];
+    allItems().forEach(function (it) {
+      var label = (tidy(it.org) || 'Untitled') + ': ' + (tidy(it.title) || '');
+      opts.push(h('option', { value: it.id, text: label, selected: p.group === it.id }));
+    });
+    return h('label', { class: 'inp' }, [
+      h('span', { text: 'Which experience does this project belong to?' }),
+      h('select', {
+        class: 'select',
+        onchange: function (e) { p.group = e.target.value; dirty = true; render(); }
+      }, opts)
+    ]);
+  }
+
+  // Small list of projects shown at the bottom of an experience page.
+  function projectsFor(it) {
+    var list = data.portfolio.filter(function (p) { return p.group === it.id && (editMode || tidy(p.title)); });
+    if (!list.length) return null;
+    return h('section', null, [h('h2', { text: 'Projects from this experience' })].concat(list.map(projectCard)));
+  }
+
+  function toolsField(p) {
+    if (!editMode) return toolChips(p.tools);
+    return h('div', {
+      class: 'editable',
+      contenteditable: 'plaintext-only',
+      'data-placeholder': 'Tools and methods, separated by commas, e.g. Aspen Plus, Python, Excel',
+      text: p.tools.join(', '),
+      onkeydown: noEnter,
+      oninput: function (e) { p.tools = splitSkills(e.target.innerText); dirty = true; }
+    });
+  }
+
+  function renderProject(p) {
+    var list = data.portfolio;
+    var i = list.indexOf(p);
+    var prev = list[i - 1], next = list[i + 1];
+
+    var kids = [h('a', { class: 'back', href: '#/portfolio' }, ['← Back to portfolio'])];
+    var owner = findItem(p.group);
+    var titleBlock = [field('h1', p, 'title', '', 'Project name')];
+    if (owner && !editMode) {
+      titleBlock.push(h('a', { class: 'page-org owner-link', href: '#/' + encodeURIComponent(owner.id) },
+        [(tidy(owner.org) || tidy(owner.title)) + (tidy(owner.title) && tidy(owner.org) ? ' · ' + tidy(owner.title) : '')]));
+    }
+    kids.push(owner
+      ? h('div', { class: 'page-head' }, [logoEl(owner, 'large'), h('div', { class: 'page-head-text' }, titleBlock)])
+      : titleBlock[0]);
+    if (editMode) kids.push(h('div', { class: 'inputs' }, [groupPicker(p)]));
+
+    if (editMode) {
+      kids.push(h('div', { class: 'meta' }, [
+        field('span', p, 'when', '', 'When, e.g. Semester 1, 2026'),
+        field('span', p, 'context', '', 'Context, e.g. CHE3165 group project')
+      ]));
+    } else {
+      var meta = [];
+      if (tidy(p.when)) meta.push(h('span', { text: tidy(p.when) }));
+      if (tidy(p.when) && tidy(p.context)) meta.push(h('span', { text: '·' }));
+      if (tidy(p.context)) meta.push(h('span', { text: tidy(p.context) }));
+      if (meta.length) kids.push(h('div', { class: 'meta' }, meta));
+    }
+    kids.push(field('p', p, 'summary', 'page-summary', 'One or two lines: what is this project?', true));
+
+    var imgSlot = h('div', null, [projectImg(p, 'project-image')]);
+    if (editMode) {
+      kids.push(h('div', { class: 'inputs' }, [
+        input('Image file name (optional): a photo, diagram or graph uploaded to GitHub', p, 'image', 'e.g. distillation-column.png', function () {
+          imgSlot.replaceChildren();
+          var img = projectImg(p, 'project-image');
+          if (img) imgSlot.appendChild(img);
+        }),
+        input('Link (optional): a report, GitHub repo, poster or slides', p, 'link', 'https://...')
+      ]));
+    }
+    kids.push(imgSlot);
+
+    var problem = block('The problem', field('p', p, 'problem', 'prose', 'What problem were you trying to solve, and why did it matter?', true));
+    var approach = block('What I did', field('p', p, 'approach', 'prose', 'How did you go about it? What did you design, test, model or build?', true));
+    var tools = block('Tools I used', toolsField(p));
+    var results = block('Results', field('p', p, 'results', 'prose', 'What came out of it? Numbers, findings, a working design, a grade, feedback...', true));
+    [problem, approach, tools, results].forEach(function (n) { if (n) kids.push(n); });
+
+    var link = safeUrl(p.link);
+    if (!editMode && link) {
+      kids.push(h('p', { style: 'margin-top:28px' }, [h('a', { class: 'link-btn', href: link, target: '_blank', rel: 'noopener' }, ['View the full project →'])]));
+    }
+
+    if (editMode) {
+      kids.push(h('div', { class: 'row-btns', style: 'margin-top:28px' }, [
+        h('button', {
+          class: 'del', type: 'button',
+          onclick: function () {
+            if (confirm('Delete this project?')) {
+              data.portfolio.splice(data.portfolio.indexOf(p), 1); dirty = true; location.hash = '#/portfolio';
+            }
+          }
+        }, ['Delete project'])
+      ]));
+    }
+
+    var nav = [];
+    nav.push(prev ? h('a', { href: projectHref(prev) }, ['← ' + (tidy(prev.title) || 'Previous')]) : h('span'));
+    if (next) nav.push(h('a', { href: projectHref(next) }, [(tidy(next.title) || 'Next') + ' →']));
+    kids.push(h('div', { class: 'page-nav' }, nav));
+
+    return [h('div', { class: 'page' }, kids)];
+  }
+
   /* ---------- edit bar ---------- */
 
   function loadFromFile() {
@@ -1192,7 +1462,14 @@
     var r = route();
     var kids, title;
 
-    if (r === 'interests') {
+    if (r === 'portfolio') {
+      kids = renderPortfolio();
+      title = 'Portfolio';
+    } else if (r && r.indexOf('portfolio/') === 0) {
+      var pr = findProject(r.slice('portfolio/'.length));
+      if (pr) { kids = renderProject(pr); title = tidy(pr.title) || 'Portfolio'; }
+      else { kids = renderPortfolio(); title = 'Portfolio'; }
+    } else if (r === 'interests') {
       kids = renderInterests();
       title = 'Interests';
     } else if (r && r.indexOf('interests/') === 0) {
@@ -1218,8 +1495,9 @@
 
   function cleaned() {
     var c = JSON.parse(JSON.stringify(data));
-    ['name', 'tagline', 'email', 'linkedin', 'resume', 'photo', 'about', 'interestsIntro'].forEach(function (k) { c[k] = tidy(c[k]); });
-    var used = { interests: true };
+    ['name', 'tagline', 'email', 'linkedin', 'resume', 'photo', 'about', 'interestsIntro', 'portfolioIntro'].forEach(function (k) { c[k] = tidy(c[k]); });
+    var used = { interests: true, portfolio: true };
+    var idMap = {};
     c.sections.forEach(function (s) {
       s.title = tidy(s.title);
       s.items = s.items.map(function (it) {
@@ -1236,6 +1514,7 @@
         var base = out.id, n = 2;
         while (used[out.id]) out.id = base + '-' + (n++);
         used[out.id] = true;
+        idMap[it.id] = out.id;
         return out;
       }).filter(function (it) {
         return it.title || it.org || it.summary || it.story || it.lessons || it.diary.length;
@@ -1250,6 +1529,19 @@
       usedPosts[out.id] = true;
       return out;
     }).filter(function (p) { return p.title || p.text || p.video; });
+    var usedProjects = {};
+    c.portfolio = (c.portfolio || []).map(function (p) {
+      var out = {
+        id: p.id, group: idMap[p.group] || '', title: tidy(p.title), when: tidy(p.when), context: tidy(p.context), summary: tidy(p.summary),
+        problem: tidy(p.problem), approach: tidy(p.approach), results: tidy(p.results),
+        tools: (p.tools || []).map(tidy).filter(Boolean), image: tidy(p.image), link: tidy(p.link)
+      };
+      if (/^project-/.test(out.id) && out.title) out.id = slugify(out.title);
+      var base = out.id, n = 2;
+      while (usedProjects[out.id]) out.id = base + '-' + (n++);
+      usedProjects[out.id] = true;
+      return out;
+    }).filter(function (p) { return p.title || p.summary || p.problem || p.approach || p.results; });
     return c;
   }
 
